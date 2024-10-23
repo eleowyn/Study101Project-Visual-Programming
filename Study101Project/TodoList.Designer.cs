@@ -1,0 +1,228 @@
+﻿namespace Study101Project
+{
+    partial class TodoList
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TodoList));
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.labelTodo = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.labelDataTodo = new System.Windows.Forms.Label();
+            this.labelBackTodo = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.labelAdd = new System.Windows.Forms.Label();
+            this.buttonAdd = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.labelType = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.checkedListBox1.BackColor = System.Drawing.Color.FloralWhite;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(428, 97);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(547, 463);
+            this.checkedListBox1.TabIndex = 8;
+            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
+            // 
+            // labelTodo
+            // 
+            this.labelTodo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelTodo.AutoSize = true;
+            this.labelTodo.BackColor = System.Drawing.Color.SeaShell;
+            this.labelTodo.Font = new System.Drawing.Font("Mongolian Baiti", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTodo.Location = new System.Drawing.Point(403, 27);
+            this.labelTodo.Name = "labelTodo";
+            this.labelTodo.Size = new System.Drawing.Size(180, 35);
+            this.labelTodo.TabIndex = 9;
+            this.labelTodo.Text = "To-do Lists";
+            this.labelTodo.Click += new System.EventHandler(this.labelTodo_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(15, 140);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(344, 22);
+            this.dateTimePicker1.TabIndex = 10;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // labelDataTodo
+            // 
+            this.labelDataTodo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelDataTodo.AutoSize = true;
+            this.labelDataTodo.BackColor = System.Drawing.Color.FloralWhite;
+            this.labelDataTodo.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDataTodo.Location = new System.Drawing.Point(12, 110);
+            this.labelDataTodo.Name = "labelDataTodo";
+            this.labelDataTodo.Size = new System.Drawing.Size(94, 19);
+            this.labelDataTodo.TabIndex = 11;
+            this.labelDataTodo.Text = "choose date";
+            this.labelDataTodo.Click += new System.EventHandler(this.labelDataTodo_Click);
+            // 
+            // labelBackTodo
+            // 
+            this.labelBackTodo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelBackTodo.AutoSize = true;
+            this.labelBackTodo.BackColor = System.Drawing.Color.FloralWhite;
+            this.labelBackTodo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBackTodo.Location = new System.Drawing.Point(12, 579);
+            this.labelBackTodo.Name = "labelBackTodo";
+            this.labelBackTodo.Size = new System.Drawing.Size(46, 18);
+            this.labelBackTodo.TabIndex = 12;
+            this.labelBackTodo.Text = "Back";
+            this.labelBackTodo.Click += new System.EventHandler(this.labelBackTodo_Click);
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxName.Location = new System.Drawing.Point(15, 263);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(346, 28);
+            this.textBoxName.TabIndex = 13;
+            // 
+            // labelAdd
+            // 
+            this.labelAdd.AutoSize = true;
+            this.labelAdd.BackColor = System.Drawing.Color.FloralWhite;
+            this.labelAdd.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAdd.Location = new System.Drawing.Point(15, 231);
+            this.labelAdd.Name = "labelAdd";
+            this.labelAdd.Size = new System.Drawing.Size(52, 19);
+            this.labelAdd.TabIndex = 14;
+            this.labelAdd.Text = "Name";
+            // 
+            // buttonAdd
+            // 
+            this.buttonAdd.BackColor = System.Drawing.Color.MistyRose;
+            this.buttonAdd.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAdd.Location = new System.Drawing.Point(22, 440);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(95, 30);
+            this.buttonAdd.TabIndex = 15;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = false;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.MistyRose;
+            this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(135, 440);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 30);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "Search";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.MistyRose;
+            this.button2.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(254, 440);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(92, 30);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "Delete";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // labelType
+            // 
+            this.labelType.AutoSize = true;
+            this.labelType.BackColor = System.Drawing.Color.FloralWhite;
+            this.labelType.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelType.Location = new System.Drawing.Point(15, 354);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(46, 19);
+            this.labelType.TabIndex = 19;
+            this.labelType.Text = "Type";
+            this.labelType.Click += new System.EventHandler(this.labelType_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Assignments",
+            "Study sesions",
+            "Daily",
+            "Work",
+            "Others"});
+            this.comboBox1.Location = new System.Drawing.Point(19, 386);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(339, 24);
+            this.comboBox1.TabIndex = 20;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // TodoList
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.ClientSize = new System.Drawing.Size(998, 606);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.labelType);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.labelAdd);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.labelBackTodo);
+            this.Controls.Add(this.labelDataTodo);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.labelTodo);
+            this.Controls.Add(this.checkedListBox1);
+            this.Name = "TodoList";
+            this.Text = "TodoList";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label labelTodo;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label labelDataTodo;
+        private System.Windows.Forms.Label labelBackTodo;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Label labelAdd;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label labelType;
+        private System.Windows.Forms.ComboBox comboBox1;
+    }
+}
