@@ -100,5 +100,13 @@ namespace Study101Project
         {
 
         }
+
+        private void labelGames_Click(object sender, EventArgs e)
+        {
+            Calender Dashboard = new Calender();
+            Dashboard.Show();
+
+            this.Close();
+        }
     }
 }

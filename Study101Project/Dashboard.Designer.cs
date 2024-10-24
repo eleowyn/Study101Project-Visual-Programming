@@ -108,6 +108,7 @@
             this.labelGames.Size = new System.Drawing.Size(119, 21);
             this.labelGames.TabIndex = 4;
             this.labelGames.Text = ">>    Games";
+            this.labelGames.Click += new System.EventHandler(this.labelGames_Click);
             // 
             // menuStrip1
             // 

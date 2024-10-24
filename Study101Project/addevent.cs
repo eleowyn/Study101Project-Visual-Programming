@@ -23,5 +23,26 @@ namespace Study101Project
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string sql = "INSERT INTO tbl_calender (calender_title, calender_date, calender_content, user_id) VALUES (@title, @date, @content, @user_id)";
+            MySqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("calender_date", textBoxDate.Text);
+            cmd.Parameters.AddWithValue("calender_title", textBoxName.Text);
+            cmd.ExecuteNonQuery();
+            MessageBox.Show("Saved");
+            conn.Dispose();
+            conn.Close();
+
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -36,19 +36,19 @@ namespace Study101Project
                 cmd.Parameters.AddWithValue("@title", taskName);
                 cmd.Parameters.AddWithValue("@duedate", selectedDate);
                 cmd.Parameters.AddWithValue("@type", taskType);
-                cmd.Parameters.AddWithValue("@user_id", 1);  // Example user_id
+                cmd.Parameters.AddWithValue("@user_id", 1);
 
                 cmd.ExecuteNonQuery();
             }
 
-            // Refresh the calendar to show the updated task on the corresponding day
+            
             tableLayoutPanel1_Paint(null, null);
             textBoxName.Clear();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            string selectedDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");  // Get date
+            string selectedDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string taskName = textBoxName.Text;
 
             if (string.IsNullOrEmpty(taskName))
@@ -76,29 +76,29 @@ namespace Study101Project
                 }
             }
 
-            // Refresh the calendar after deletion
+            
             tableLayoutPanel1_Paint(null, null);
             textBoxName.Clear();
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-            tableLayoutPanel1.Controls.Clear();  // Clear previous calendar data
+            tableLayoutPanel1.Controls.Clear();
 
-            DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);  // Get first day of the current month
-            int daysInMonth = DateTime.DaysInMonth(startDate.Year, startDate.Month);  // Get total days in the month
+            DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            int daysInMonth = DateTime.DaysInMonth(startDate.Year, startDate.Month);
             int startDayOffset = (int)startDate.DayOfWeek;
 
             for (int i = 0; i < startDayOffset; i++)
             {
-                tableLayoutPanel1.Controls.Add(new Label());  // Empty cells
+                tableLayoutPanel1.Controls.Add(new Label());
             }
 
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 conn.Open();
 
-                // Query to get all tasks for the current month
+                
                 MySqlCommand cmd = new MySqlCommand("SELECT task_duedate, COUNT(*) as task_count FROM tbl_task WHERE MONTH(task_duedate) = @month AND YEAR(task_duedate) = @year GROUP BY task_duedate", conn);
                 cmd.Parameters.AddWithValue("@month", DateTime.Now.Month);
                 cmd.Parameters.AddWithValue("@year", DateTime.Now.Year);
@@ -111,23 +111,23 @@ namespace Study101Project
                 {
                     DateTime taskDate = Convert.ToDateTime(reader["task_duedate"]);
                     int taskCount = Convert.ToInt32(reader["task_count"]);
-                    taskDates[taskDate] = taskCount;  // Store the task count for each day
+                    taskDates[taskDate] = taskCount;
                 }
 
                 reader.Close();
 
-                // Adding buttons to represent each day
+                
                 for (int day = 1; day <= daysInMonth; day++)
                 {
                     DateTime currentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, day);
                     Button dayButton = new Button();
                     dayButton.Text = day.ToString();
 
-                    // Highlight days with tasks
+                    
                     if (taskDates.ContainsKey(currentDate))
                     {
-                        dayButton.BackColor = Color.LightGreen;  // Highlight
-                        dayButton.Text += $" ({taskDates[currentDate]})";  // Show task count
+                        dayButton.BackColor = Color.LightGreen;
+                        dayButton.Text += $" ({taskDates[currentDate]})";
                     }
                     else
                     {

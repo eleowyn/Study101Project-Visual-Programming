@@ -7,7 +7,7 @@ namespace Study101Project
 {
     public partial class Details : Form
     {
-        // Database connection string
+        
         private string connectionString = "Server=127.0.0.1;Database=db_study101;Uid=root;Pwd=;";
 
         public Details()
@@ -15,7 +15,7 @@ namespace Study101Project
             InitializeComponent();
         }
 
-        // On form load, load data into ListView1 and ListView2
+        
         private void Details_Load(object sender, EventArgs e)
         {
             LoadOverallScores();
@@ -23,7 +23,7 @@ namespace Study101Project
             LoadCategories();
         }
 
-        // Method to load overall scores into listView1 (tbl_subjects)
+        
         private void LoadOverallScores()
         {
             listView1.Items.Clear();
@@ -51,7 +51,7 @@ namespace Study101Project
             }
         }
 
-        // When a subject is selected in listView1, load its individual scores into listView2 (tbl_score)
+        
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listView1.SelectedItems.Count > 0)
@@ -61,7 +61,7 @@ namespace Study101Project
             }
         }
 
-        // Load individual scores into listView2 based on selected subject
+        
         private void LoadSubjectScores(string subjectName)
         {
             listView2.Items.Clear();
@@ -90,14 +90,14 @@ namespace Study101Project
             }
         }
 
-        // Deleting a score from the second ListView (tbl_score)
+        
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (listView2.SelectedItems.Count > 0)
             {
                 string taskName = listView2.SelectedItems[0].Text;
                 DeleteScore(taskName);
-                listView2.Items.Remove(listView2.SelectedItems[0]); // Remove from ListView2
+                listView2.Items.Remove(listView2.SelectedItems[0]);
             }
             else
             {
@@ -107,10 +107,10 @@ namespace Study101Project
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Add logic for when listView2's selected item changes if needed
+            
         }
 
-        // Delete the selected task score from the database
+        
         private void DeleteScore(string taskName)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -132,7 +132,7 @@ namespace Study101Project
             }
         }
 
-        // Load subjects into comboBox1
+        
         private void LoadSubjects()
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -156,7 +156,7 @@ namespace Study101Project
             }
         }
 
-        // Load categories into comboBox2
+        
         private void LoadCategories()
         {
             string[] categories = { "Assignment", "Quiz", "Test", "Midterm", "Final", "Project" };
@@ -165,27 +165,27 @@ namespace Study101Project
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Add logic for when a subject is selected in comboBox1 if needed
+            
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Add logic for when a category is selected in comboBox2 if needed
+            
         }
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Add logic for when an item is selected in comboBox3 if needed
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            // Add logic for when text changes in textBox1 if needed
+            
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            // Add logic for when text changes in textBox2 if needed
+            
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)

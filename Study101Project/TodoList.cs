@@ -63,10 +63,10 @@ namespace Study101Project
             {
                 string selectedTask = checkedListBox1.SelectedItem.ToString();
 
-                // Extract the task name (before the due date part)
+                
                 string taskName = selectedTask.Split(new string[] { " (Due: " }, StringSplitOptions.None)[0];
 
-                // Delete from tbl_task (both the todo list and calendar now rely on tbl_task)
+                
                 using (MySqlConnection conn = new MySqlConnection(alamat))
                 {
                     conn.Open();
@@ -78,7 +78,7 @@ namespace Study101Project
                     }
                 }
 
-                // Reload tasks to reflect changes
+                
                 LoadTasks();
 
                 MessageBox.Show("Task deleted automatically after being checked from both To-Do list and Calendar.", "Task Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -91,7 +91,7 @@ namespace Study101Project
             using (MySqlConnection conn = new MySqlConnection(alamat))
             {
                 conn.Open();
-                // Fetch tasks from tbl_task, as we are now using it for both TodoList and Calendar
+                
                 string query = "SELECT task_title, task_duedate FROM tbl_task";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
@@ -117,7 +117,7 @@ namespace Study101Project
                 using (MySqlConnection conn = new MySqlConnection(alamat))
                 {
                     conn.Open();
-                    // Insert into tbl_task instead of tbl_todo to sync with Calendar
+
                     string query = "INSERT INTO tbl_task (task_title, task_duedate) VALUES (@task, @dueDate)";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
@@ -141,7 +141,7 @@ namespace Study101Project
                 string selectedTask = checkedListBox1.SelectedItem.ToString();
                 string taskName = selectedTask.Split(new string[] { " (Due: " }, StringSplitOptions.None)[0];
 
-                // Delete from tbl_task (both the todo list and calendar now rely on tbl_task)
+                
                 using (MySqlConnection conn = new MySqlConnection(alamat))
                 {
                     conn.Open();
