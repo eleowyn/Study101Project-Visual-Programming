@@ -71,7 +71,7 @@ namespace Study101Project
                 try
                 {
                     conn.Open();
-                    string query = "SELECT Task_name, Score FROM tbl_score WHERE subjectID = (SELECT subjectID FROM tbl_subjects WHERE subject_name = @subjectName)";
+                    string query = "SELECT Task_name, Score FROM tbl_scoree WHERE subjectID = (SELECT subjectID FROM tbl_subjects WHERE subject_name = @subjectName)";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@subjectName", subjectName);
                     MySqlDataReader reader = cmd.ExecuteReader();
@@ -118,7 +118,7 @@ namespace Study101Project
                 try
                 {
                     conn.Open();
-                    string query = "DELETE FROM tbl_score WHERE Task_name = @taskName";
+                    string query = "DELETE FROM tbl_scoree WHERE Task_name = @taskName";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@taskName", taskName);
                     cmd.ExecuteNonQuery();
@@ -173,10 +173,7 @@ namespace Study101Project
             
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
+       
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -217,7 +214,7 @@ namespace Study101Project
                 try
                 {
                     conn.Open();
-                    string query = @"INSERT INTO tbl_score (subjectID, Task_name, Score) VALUES ((SELECT subjectID FROM tbl_subjects WHERE subject_name = @subject), @taskName, @score); UPDATE tbl_subjects  SET " + category.ToLower() + "_score = " + category.ToLower() + "_score + @score  WHERE subject_name = @subject";
+                    string query = @"INSERT INTO tbl_scoree (subjectID, Task_name, Score) VALUES ((SELECT subjectID FROM tbl_subjects WHERE subject_name = @subject), @taskName, @score); UPDATE tbl_subjects  SET " + category.ToLower() + "_score = " + category.ToLower() + "_score + @score  WHERE subject_name = @subject";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@subject", subject);
                     cmd.Parameters.AddWithValue("@taskName", taskName);
@@ -235,16 +232,14 @@ namespace Study101Project
             }
         }
 
-        private void buttonBack_Click(object sender, EventArgs e)
+        
+
+        private void buttonBack_Click_1(object sender, EventArgs e)
         {
             Tracker Details = new Tracker();
             Details.Show();
+
             this.Close();
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
