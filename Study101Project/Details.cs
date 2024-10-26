@@ -173,7 +173,10 @@ namespace Study101Project
             
         }
 
-       
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

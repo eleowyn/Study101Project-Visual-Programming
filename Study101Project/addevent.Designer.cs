@@ -34,7 +34,7 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.labelDate = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxDate
@@ -81,16 +81,16 @@
             this.labelName.TabIndex = 4;
             this.labelName.Text = "Name";
             // 
-            // button1
+            // buttonAdd
             // 
-            this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(476, 269);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 35);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAdd.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAdd.Location = new System.Drawing.Point(476, 269);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(90, 35);
+            this.buttonAdd.TabIndex = 5;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.button1_Click);
             // 
             // addevent
             // 
@@ -98,7 +98,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(644, 366);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.textBoxName);
@@ -119,6 +119,6 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }

@@ -53,6 +53,7 @@
             this.labelMonthyear.Size = new System.Drawing.Size(160, 31);
             this.labelMonthyear.TabIndex = 0;
             this.labelMonthyear.Text = "Month Year";
+            this.labelMonthyear.Click += new System.EventHandler(this.labelMonthyear_Click);
             // 
             // daycontainer
             // 
@@ -158,6 +159,7 @@
             this.buttonPrevious.TabIndex = 6;
             this.buttonPrevious.Text = "Previous";
             this.buttonPrevious.UseVisualStyleBackColor = true;
+            this.buttonPrevious.Click += new System.EventHandler(this.buttonPrevious_Click_1);
             // 
             // buttonNext
             // 

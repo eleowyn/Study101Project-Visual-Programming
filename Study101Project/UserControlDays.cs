@@ -12,6 +12,8 @@ namespace Study101Project
 {
     public partial class UserControlDays : UserControl
     {
+        public static string static_day;
+
         public UserControlDays()
         {
             InitializeComponent();
@@ -25,6 +27,13 @@ namespace Study101Project
         public void days(int numday)
         {
             label1Bdays.Text = numday.ToString();
+        }
+
+        private void UserControlDays_Click(object sender, EventArgs e)
+        {
+            static_day = label1Bdays.Text;
+            addevent eventform = new addevent();
+            eventform.Show();
         }
     }
 }
