@@ -44,6 +44,7 @@
             // 
             // dateDiary
             // 
+            this.dateDiary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dateDiary.CalendarMonthBackground = System.Drawing.Color.MistyRose;
             this.dateDiary.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dateDiary.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -56,6 +57,7 @@
             // 
             // labelNewDiary
             // 
+            this.labelNewDiary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelNewDiary.AutoSize = true;
             this.labelNewDiary.BackColor = System.Drawing.Color.Linen;
             this.labelNewDiary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -68,6 +70,7 @@
             // 
             // labelDeleteDiary
             // 
+            this.labelDeleteDiary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelDeleteDiary.AutoSize = true;
             this.labelDeleteDiary.BackColor = System.Drawing.Color.Linen;
             this.labelDeleteDiary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -80,6 +83,7 @@
             // 
             // labelSaveDiary
             // 
+            this.labelSaveDiary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelSaveDiary.AutoSize = true;
             this.labelSaveDiary.BackColor = System.Drawing.Color.SeaShell;
             this.labelSaveDiary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -92,6 +96,7 @@
             // 
             // labelClearDiary
             // 
+            this.labelClearDiary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelClearDiary.AutoSize = true;
             this.labelClearDiary.BackColor = System.Drawing.Color.Linen;
             this.labelClearDiary.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -104,6 +109,7 @@
             // 
             // labelBackDiary
             // 
+            this.labelBackDiary.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelBackDiary.AutoSize = true;
             this.labelBackDiary.BackColor = System.Drawing.Color.Linen;
             this.labelBackDiary.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -116,6 +122,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox1.BackColor = System.Drawing.Color.FloralWhite;
             this.textBox1.Font = new System.Drawing.Font("Mongolian Baiti", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(45, 95);
@@ -127,6 +134,7 @@
             // 
             // Diary_List
             // 
+            this.Diary_List.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Diary_List.BackColor = System.Drawing.Color.SeaShell;
             this.Diary_List.FormattingEnabled = true;
             this.Diary_List.ItemHeight = 16;
@@ -138,6 +146,7 @@
             // 
             // textBoxName
             // 
+            this.textBoxName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBoxName.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxName.Location = new System.Drawing.Point(370, 46);
             this.textBoxName.Name = "textBoxName";
@@ -147,6 +156,7 @@
             // 
             // labelDatetime
             // 
+            this.labelDatetime.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelDatetime.AutoSize = true;
             this.labelDatetime.BackColor = System.Drawing.Color.FloralWhite;
             this.labelDatetime.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -158,6 +168,7 @@
             // 
             // labelName
             // 
+            this.labelName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelName.AutoSize = true;
             this.labelName.BackColor = System.Drawing.Color.FloralWhite;
             this.labelName.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -187,6 +198,7 @@
             this.Controls.Add(this.dateDiary);
             this.DoubleBuffered = true;
             this.Name = "Diary";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Diary";
             this.Load += new System.EventHandler(this.Diary_Load);
             this.ResumeLayout(false);

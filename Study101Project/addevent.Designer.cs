@@ -29,22 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textBoxDate = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.labelDate = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.textBoxDate = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // textBoxDate
-            // 
-            this.textBoxDate.Enabled = false;
-            this.textBoxDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDate.Location = new System.Drawing.Point(182, 64);
-            this.textBoxDate.Name = "textBoxDate";
-            this.textBoxDate.Size = new System.Drawing.Size(384, 34);
-            this.textBoxDate.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
@@ -65,7 +56,7 @@
             // 
             this.labelDate.AutoSize = true;
             this.labelDate.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDate.Location = new System.Drawing.Point(49, 73);
+            this.labelDate.Location = new System.Drawing.Point(49, 94);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(48, 21);
             this.labelDate.TabIndex = 3;
@@ -92,20 +83,28 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.button1_Click);
             // 
+            // textBoxDate
+            // 
+            this.textBoxDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDate.Location = new System.Drawing.Point(182, 81);
+            this.textBoxDate.Name = "textBoxDate";
+            this.textBoxDate.Size = new System.Drawing.Size(384, 34);
+            this.textBoxDate.TabIndex = 6;
+            this.textBoxDate.TextChanged += new System.EventHandler(this.textBoxDate_TextChanged);
+            // 
             // addevent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(644, 366);
+            this.Controls.Add(this.textBoxDate);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.textBoxName);
-            this.Controls.Add(this.textBoxDate);
             this.Name = "addevent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "addevent";
             this.Load += new System.EventHandler(this.addevent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -113,12 +112,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBoxDate;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.TextBox textBoxDate;
     }
 }

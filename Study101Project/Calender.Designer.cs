@@ -40,6 +40,7 @@
             this.labelSunday = new System.Windows.Forms.Label();
             this.buttonPrevious = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelMonthyear
@@ -173,12 +174,25 @@
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
+            // btnBack
+            // 
+            this.btnBack.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnBack.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(12, 722);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(104, 36);
+            this.btnBack.TabIndex = 8;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // Calender
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1299, 765);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonPrevious);
             this.Controls.Add(this.labelSunday);
@@ -191,6 +205,7 @@
             this.Controls.Add(this.daycontainer);
             this.Controls.Add(this.labelMonthyear);
             this.Name = "Calender";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calender";
             this.Load += new System.EventHandler(this.Calender_Load);
             this.ResumeLayout(false);
@@ -211,5 +226,6 @@
         private System.Windows.Forms.Label labelSunday;
         private System.Windows.Forms.Button buttonPrevious;
         private System.Windows.Forms.Button buttonNext;
+        private System.Windows.Forms.Button btnBack;
     }
 }

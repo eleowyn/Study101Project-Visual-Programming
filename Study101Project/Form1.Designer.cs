@@ -42,7 +42,7 @@
             this.lblUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUsername.Location = new System.Drawing.Point(121, 233);
+            this.lblUsername.Location = new System.Drawing.Point(96, 261);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(100, 21);
             this.lblUsername.TabIndex = 0;
@@ -54,7 +54,7 @@
             this.lblPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(121, 317);
+            this.lblPassword.Location = new System.Drawing.Point(96, 345);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(95, 21);
             this.lblPassword.TabIndex = 1;
@@ -66,9 +66,9 @@
             this.txtUsername.BackColor = System.Drawing.Color.AntiqueWhite;
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(125, 257);
+            this.txtUsername.Location = new System.Drawing.Point(100, 285);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(327, 31);
+            this.txtUsername.Size = new System.Drawing.Size(523, 31);
             this.txtUsername.TabIndex = 2;
             // 
             // txtPassword
@@ -77,9 +77,9 @@
             this.txtPassword.BackColor = System.Drawing.Color.AntiqueWhite;
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPassword.Location = new System.Drawing.Point(125, 350);
+            this.txtPassword.Location = new System.Drawing.Point(100, 378);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(327, 31);
+            this.txtPassword.Size = new System.Drawing.Size(523, 31);
             this.txtPassword.TabIndex = 3;
             // 
             // btnLogin
@@ -92,9 +92,9 @@
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.AntiqueWhite;
-            this.btnLogin.Location = new System.Drawing.Point(125, 426);
+            this.btnLogin.Location = new System.Drawing.Point(100, 463);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(327, 41);
+            this.btnLogin.Size = new System.Drawing.Size(523, 41);
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "LOGIN";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -107,9 +107,9 @@
             this.btbClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btbClear.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btbClear.ForeColor = System.Drawing.Color.AntiqueWhite;
-            this.btbClear.Location = new System.Drawing.Point(125, 483);
+            this.btbClear.Location = new System.Drawing.Point(100, 520);
             this.btbClear.Name = "btbClear";
-            this.btbClear.Size = new System.Drawing.Size(327, 45);
+            this.btbClear.Size = new System.Drawing.Size(523, 45);
             this.btbClear.TabIndex = 5;
             this.btbClear.Text = "CLEAR";
             this.btbClear.UseVisualStyleBackColor = false;
@@ -122,7 +122,7 @@
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1061, 631);
+            this.ClientSize = new System.Drawing.Size(1303, 771);
             this.Controls.Add(this.btbClear);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPassword);
@@ -132,6 +132,7 @@
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.RightToLeftLayout = true;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -173,6 +173,13 @@ namespace Study101Project
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Close();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string searchQuery = textBoxName.Text;

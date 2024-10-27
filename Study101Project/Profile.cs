@@ -35,9 +35,9 @@ namespace Study101Project
                         {
                             if (reader.Read())
                             {
-                                textBoxUsername.Text = reader["user_name"].ToString();
-                                textBoxPassword.Text = reader["user_email"].ToString();
-                                label3.Text = userId.ToString();
+                                txtUsername.Text = reader["user_name"].ToString();
+                                txtPassword.Text = reader["user_email"].ToString();
+                                lblEmail.Text = userId.ToString();
                             }
                         }
                     }

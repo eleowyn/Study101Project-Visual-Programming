@@ -57,7 +57,7 @@ namespace Study101Project
             for (int i = 1; i <= days; i++)
             {
                 UserControlDays ucdays = new UserControlDays();
-                ucdays.days(i);  
+                ucdays.days(i);
                 daycontainer.Controls.Add(ucdays);
             }
         }
@@ -73,15 +73,15 @@ namespace Study101Project
             month++;
             if (month > 12)
             {
-                month = 1;  
-                year++;     
+                month = 1;
+                year++;
             }
 
-            
+
             displayDays(month, year);
         }
 
-       
+
 
         private void labelMonthyear_Click(object sender, EventArgs e)
         {
@@ -107,9 +107,16 @@ namespace Study101Project
             displayDays(month, year);
         }
 
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Dashboard Calender = new Dashboard();
+            Calender.Show();
+            this.Close();
+        }
+
         private void label6_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void label5_Click(object sender, EventArgs e)

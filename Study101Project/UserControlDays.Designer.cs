@@ -45,9 +45,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.label1Bdays);
             this.Name = "UserControlDays";
-            this.Size = new System.Drawing.Size(176, 91);
+            this.Size = new System.Drawing.Size(174, 89);
             this.Load += new System.EventHandler(this.UserControlDays_Load);
             this.Click += new System.EventHandler(this.UserControlDays_Click);
             this.ResumeLayout(false);

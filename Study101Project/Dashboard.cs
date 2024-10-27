@@ -67,7 +67,7 @@ namespace Study101Project
 
         private void label2_Click_2(object sender, EventArgs e)
         {
-            CalendarTracker Dashboard = new CalendarTracker();
+            Calender Dashboard = new Calender();
             Dashboard.Show();
 
             this.Close();
@@ -103,10 +103,15 @@ namespace Study101Project
 
         private void labelGames_Click(object sender, EventArgs e)
         {
-            Calender Dashboard = new Calender();
+            Game Dashboard = new Game();
             Dashboard.Show();
 
             this.Close();
+        }
+
+        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+
         }
     }
 }

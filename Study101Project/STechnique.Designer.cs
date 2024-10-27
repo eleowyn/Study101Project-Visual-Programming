@@ -44,8 +44,8 @@
             this.numericUpDownHours = new System.Windows.Forms.NumericUpDown();
             this.labelPomodoro = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeconds)).BeginInit();
@@ -205,10 +205,6 @@
             this.groupBox2.Text = "Flashcards";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // timer4
-            // 
-            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -217,6 +213,10 @@
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
+            // 
+            // timer4
+            // 
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
             // 
             // button1
             // 
@@ -240,6 +240,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "STechnique";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STechnique";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

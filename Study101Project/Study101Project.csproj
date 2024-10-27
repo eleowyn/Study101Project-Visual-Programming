@@ -73,11 +73,23 @@
     <Compile Include="CalenderDetails.Designer.cs">
       <DependentUpon>CalenderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Choose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Choose.Designer.cs">
+      <DependentUpon>Choose.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Daydetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Daydetails.Designer.cs">
+      <DependentUpon>Daydetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Details.cs">
       <SubType>Form</SubType>
@@ -153,8 +165,14 @@
     <EmbeddedResource Include="CalenderDetails.resx">
       <DependentUpon>CalenderDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Choose.resx">
+      <DependentUpon>Choose.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Daydetails.resx">
+      <DependentUpon>Daydetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Details.resx">
       <DependentUpon>Details.cs</DependentUpon>
