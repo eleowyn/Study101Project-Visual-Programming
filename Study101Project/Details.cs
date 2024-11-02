@@ -7,7 +7,7 @@ namespace Study101Project
 {
     public partial class Details : Form
     {
-        
+
         private string connectionString = "Server=127.0.0.1;Database=db_study101;Uid=root;Pwd=;";
 
         public Details()
@@ -15,124 +15,14 @@ namespace Study101Project
             InitializeComponent();
         }
 
-        
+
         private void Details_Load(object sender, EventArgs e)
         {
-            LoadOverallScores();
+
             LoadSubjects();
             LoadCategories();
         }
 
-        
-        private void LoadOverallScores()
-        {
-            listView1.Items.Clear();
-
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "SELECT subject_name, (assignment_score + quiz_score + test_score + midterm_score + final_score + project_score) AS OverallScore FROM tbl_subjects";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        ListViewItem item = new ListViewItem(reader["subject_name"].ToString());
-                        item.SubItems.Add(reader["OverallScore"].ToString());
-                        listView1.Items.Add(item);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error loading data: {ex.Message}");
-                }
-            }
-        }
-
-        
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (listView1.SelectedItems.Count > 0)
-            {
-                string selectedSubject = listView1.SelectedItems[0].Text;
-                LoadSubjectScores(selectedSubject);
-            }
-        }
-
-        
-        private void LoadSubjectScores(string subjectName)
-        {
-            listView2.Items.Clear();
-
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "SELECT Task_name, Score FROM tbl_scoree WHERE subjectID = (SELECT subjectID FROM tbl_subjects WHERE subject_name = @subjectName)";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@subjectName", subjectName);
-                    MySqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        ListViewItem item = new ListViewItem(reader["Task_name"].ToString());
-                        item.SubItems.Add(reader["Score"].ToString());
-                        listView2.Items.Add(item);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error loading individual scores: {ex.Message}");
-                }
-            }
-        }
-
-        
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            if (listView2.SelectedItems.Count > 0)
-            {
-                string taskName = listView2.SelectedItems[0].Text;
-                DeleteScore(taskName);
-                listView2.Items.Remove(listView2.SelectedItems[0]);
-            }
-            else
-            {
-                MessageBox.Show("Please select a score to delete.");
-            }
-        }
-
-        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        
-        private void DeleteScore(string taskName)
-        {
-            using (MySqlConnection conn = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "DELETE FROM tbl_scoree WHERE Task_name = @taskName";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@taskName", taskName);
-                    cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Score deleted successfully.");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Error deleting score: {ex.Message}");
-                }
-            }
-        }
-
-        
         private void LoadSubjects()
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -156,36 +46,90 @@ namespace Study101Project
             }
         }
 
-        
         private void LoadCategories()
         {
             string[] categories = { "Assignment", "Quiz", "Test", "Midterm", "Final", "Project" };
             comboBox2.Items.AddRange(categories);
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            if (listView1.SelectedItems.Count > 0)
+            {
+                string selectedSubject = listView1.SelectedItems[0].Text;
+                LoadSubjectScores(selectedSubject);
+            }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void LoadOverallScores()
         {
-            
+            listView1.Items.Clear();
+
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT subject_name, assignment_score, quiz_score, test_score, midterm_score, final_score, project_score FROM tbl_subjects";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ListViewItem item = new ListViewItem(reader["subject_name"].ToString());
+                        item.SubItems.Add(reader["assignment_score"].ToString());
+                        item.SubItems.Add(reader["quiz_score"].ToString());
+                        item.SubItems.Add(reader["test_score"].ToString());
+                        item.SubItems.Add(reader["midterm_score"].ToString());
+                        item.SubItems.Add(reader["final_score"].ToString());
+                        item.SubItems.Add(reader["project_score"].ToString());
+
+                        listView1.Items.Add(item);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading data: {ex.Message}");
+                }
+            }
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void LoadSubjectScores(string subjectName)
         {
-            
-        }
+            listView2.Items.Clear();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT task_name, Score FROM tbl_scoree WHERE subject_id = (SELECT subject_id FROM tbl_subjects WHERE subject_name = @subjectName)";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@subjectName", subjectName);
+                    MySqlDataReader reader = cmd.ExecuteReader();
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
+                    float totalScore = 0;
+                    int count = 0;
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            
+                    while (reader.Read())
+                    {
+                        ListViewItem item = new ListViewItem(reader["Task_name"].ToString());
+                        float score = Convert.ToSingle(reader["Score"]);
+                        item.SubItems.Add(score.ToString());
+
+                        totalScore += score;
+                        count++;
+
+                        listView2.Items.Add(item);
+                    }
+
+                    float overallScore = count > 0 ? totalScore / count : 0;
+                    MessageBox.Show($"Overall Score for {subjectName}: {overallScore}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading individual scores: {ex.Message}");
+                }
+            }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -217,7 +161,9 @@ namespace Study101Project
                 try
                 {
                     conn.Open();
-                    string query = @"INSERT INTO tbl_scoree (subjectID, Task_name, Score) VALUES ((SELECT subjectID FROM tbl_subjects WHERE subject_name = @subject), @taskName, @score); UPDATE tbl_subjects  SET " + category.ToLower() + "_score = " + category.ToLower() + "_score + @score  WHERE subject_name = @subject";
+                    string query = @"INSERT INTO tbl_scoree (subject_id, Task_name, Score) 
+                                     VALUES ((SELECT subject_id FROM tbl_subjects WHERE subject_name = @subject), @taskName, @score); 
+                                     UPDATE tbl_subjects SET " + category.ToLower() + "_score = " + category.ToLower() + "_score + @score WHERE subject_name = @subject";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@subject", subject);
                     cmd.Parameters.AddWithValue("@taskName", taskName);
@@ -235,14 +181,45 @@ namespace Study101Project
             }
         }
 
-        
-
         private void buttonBack_Click_1(object sender, EventArgs e)
         {
             Tracker Details = new Tracker();
             Details.Show();
 
             this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

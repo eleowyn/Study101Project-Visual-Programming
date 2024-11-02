@@ -55,6 +55,12 @@
     <Compile Include="addevent.Designer.cs">
       <DependentUpon>addevent.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddFlashcardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddFlashcardForm.Designer.cs">
+      <DependentUpon>AddFlashcardForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CalendarTracker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     </Compile>
     <EmbeddedResource Include="addevent.resx">
       <DependentUpon>addevent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddFlashcardForm.resx">
+      <DependentUpon>AddFlashcardForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CalendarTracker.resx">
       <DependentUpon>CalendarTracker.cs</DependentUpon>

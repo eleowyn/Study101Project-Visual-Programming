@@ -86,7 +86,7 @@ namespace Study101Project
             this.listView2.HideSelection = false;
             this.listView2.Location = new System.Drawing.Point(557, 55);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(456, 254);
+            this.listView2.Size = new System.Drawing.Size(456, 290);
             this.listView2.TabIndex = 6;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);

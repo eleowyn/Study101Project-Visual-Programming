@@ -16,10 +16,16 @@ namespace Study101Project
         private int minutes;
         private int seconds;
         private int trig = 0;
+        private List<Flashcard> flashcards;
+        private int currentIndex = 0;
+
         public STechnique()
         {
             InitializeComponent();
+            flashcards = new List<Flashcard>();
+            DisplayFlashcard();
         }
+
 
         private void groupBox2_Enter(object sender, EventArgs e)
         {
@@ -39,7 +45,7 @@ namespace Study101Project
 
             labelJam.Text = hours.ToString();
             labelMenit.Text = minutes.ToString();
-            labelDetik.Text = minutes.ToString();
+            labelDetik.Text = seconds.ToString();
 
             if (trig == 0)
             {
@@ -53,7 +59,7 @@ namespace Study101Project
 
         private void labelJam_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
@@ -69,7 +75,7 @@ namespace Study101Project
             seconds--;
             if (seconds <= 0)
             {
-                if(minutes > 0 || hours > 0)
+                if (minutes > 0 || hours > 0)
                 {
                     if (minutes == 0)
                     {
@@ -97,7 +103,7 @@ namespace Study101Project
                     }
 
                 }
-                if (seconds <  0)
+                if (seconds < 0)
                 {
                     seconds = 0;
                 }
@@ -114,6 +120,90 @@ namespace Study101Project
             STechnique.Show();
 
             this.Close();
+        }
+
+        // Flashcard class
+        public class Flashcard
+        {
+            public string Question { get; set; }
+            public string Answer { get; set; }
+
+            public Flashcard(string question, string answer)
+            {
+                Question = question;
+                Answer = answer;
+            }
+        }
+
+        // Display current flashcard
+        private void DisplayFlashcard()
+        {
+            if (flashcards.Count > 0)
+            {
+                lblQuestion.Text = flashcards[currentIndex].Question;
+                lblAnswer.Text = ""; // Hide the answer initially
+            }
+            else
+            {
+                lblQuestion.Text = "No flashcards available. Please add a flashcard.";
+                lblAnswer.Text = "";
+            }
+        }
+
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (flashcards.Count > 0)
+            {
+                currentIndex = (currentIndex + 1) % flashcards.Count;
+                DisplayFlashcard();
+            }
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (flashcards.Count > 0)
+            {
+                currentIndex = (currentIndex - 1 + flashcards.Count) % flashcards.Count;
+                DisplayFlashcard();
+            }
+        }
+
+
+        private void btnFlip_Click(object sender, EventArgs e)
+        {
+            if (flashcards.Count > 0)
+            {
+                lblAnswer.Text = flashcards[currentIndex].Answer;
+            }
+            else
+            {
+                lblAnswer.Text = "No answer available. Please add a flashcard.";
+            }
+        }
+
+        private void btnAddFlashcard_Click(object sender, EventArgs e)
+        {
+            using (var form = new AddFlashcardForm())
+            {
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    flashcards.Add(new Flashcard(form.QuestionText, form.AnswerText));
+                    currentIndex = flashcards.Count - 1; // Set to the latest added flashcard
+                    DisplayFlashcard();
+                }
+            }
+        }
+
+
+        private void lblQuestion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblAnswer_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
