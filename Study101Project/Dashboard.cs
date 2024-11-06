@@ -18,17 +18,11 @@ namespace Study101Project
         public Dashboard()
         {
             InitializeComponent();
-            this.Paint += new PaintEventHandler(DrawLine);
             CustomizeDataGridView();
             LoadTasks();
+            DisplayRandomQuote();
         }
-        private void DrawLine(object sender, PaintEventArgs e)
-        {
-            Graphics g = e.Graphics;
-            Pen myPen = new Pen(Color.Black, 1);
-            g.DrawLine(myPen, 50, 50, 300, 50);
-            myPen.Dispose();
-        }
+       
 
 
         private void label2_Click_1(object sender, EventArgs e)
@@ -47,11 +41,6 @@ namespace Study101Project
         private void Dashboard_Load(object sender, EventArgs e)
         {
             LoadTasks();
-        }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
         }
 
         private void label3_Click_1(object sender, EventArgs e)
@@ -146,13 +135,13 @@ namespace Study101Project
 
         private void LoadTasks()
         {
+            CustomizeRoundedDataGridView();
             dataGridView1.Rows.Clear();
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
-
                     string query = "SELECT task_title, task_duedate, task_type FROM tbl_task WHERE user_id = @userId";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
@@ -161,11 +150,25 @@ namespace Study101Project
                     {
                         while (reader.Read())
                         {
-                            dataGridView1.Rows.Add(
+                            DateTime dueDate = Convert.ToDateTime(reader["task_duedate"]);
+                            int rowIndex = dataGridView1.Rows.Add(
                                 reader["task_title"].ToString(),
-                                Convert.ToDateTime(reader["task_duedate"]).ToShortDateString(),
+                                dueDate.ToShortDateString(),
                                 reader["task_type"].ToString()
                             );
+
+                            if (dueDate < DateTime.Now)
+                            {
+                                dataGridView1.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
+                            }
+                            else if ((dueDate - DateTime.Now).TotalDays < 7)
+                            {
+                                dataGridView1.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
+                            }
+                            else
+                            {
+                                dataGridView1.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightPink;
+                            }
                         }
                     }
                 }
@@ -173,7 +176,70 @@ namespace Study101Project
                 {
                     MessageBox.Show("Error loading tasks: " + ex.Message);
                 }
+
+
             }
+        }
+
+        // Call this method in the Form Load or after initializing the DataGridView
+        private void CustomizeRoundedDataGridView()
+        {
+            dataGridView1.BorderStyle = BorderStyle.None; // Remove default border
+
+            // Attach the paint event handler
+            dataGridView1.Paint += DataGridView1_Paint;
+        }
+
+        // Custom Paint event handler to create rounded corners
+        private void DataGridView1_Paint(object sender, PaintEventArgs e)
+        {
+            // Create rounded rectangle path
+            int radius = 20; // Adjust as needed for corner roundness
+            int width = dataGridView1.Width;
+            int height = dataGridView1.Height;
+
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            path.StartFigure();
+            path.AddArc(new Rectangle(0, 0, radius, radius), 180, 90);
+            path.AddArc(new Rectangle(width - radius, 0, radius, radius), 270, 90);
+            path.AddArc(new Rectangle(width - radius, height - radius, radius, radius), 0, 90);
+            path.AddArc(new Rectangle(0, height - radius, radius, radius), 90, 90);
+            path.CloseFigure();
+
+            // Set the clipping region for rounded edges
+            dataGridView1.Region = new Region(path);
+
+            // Draw a border around the DataGridView
+            using (Pen pen = new Pen(Color.Gray, 2))
+            {
+                e.Graphics.DrawPath(pen, path);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private List<string> quotes = new List<string>
+        {
+            "The only way to do great work is to love what you do. - Steve Jobs",
+            "Success is not the key to happiness. Happiness is the key to success. - Albert Schweitzer",
+            "Don't watch the clock; do what it does. Keep going. - Sam Levenson",
+            "The future depends on what you do today. - Mahatma Gandhi",
+            "Believe you can and you're halfway there. - Theodore Roosevelt",
+            "You don’t have to be great to start, but you have to start to be great. - Zig Ziglar",
+            "The way to get started is to quit talking and begin doing. - Walt Disney",
+            "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
+            "Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort. - Paul J. Meyer",
+            "Education is the passport to the future, for tomorrow belongs to those who prepare for it today. - Malcolm X"
+        };
+
+        private void DisplayRandomQuote()
+        {
+            Random random = new Random();
+            int index = random.Next(quotes.Count);
+            textBox1.Text = quotes[index];
         }
     }
 }

@@ -77,7 +77,7 @@ namespace Study101Project
             // 
             this.listView2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(557, 39);
+            this.listView2.Location = new System.Drawing.Point(557, 385);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(456, 235);
             this.listView2.TabIndex = 6;
@@ -196,7 +196,7 @@ namespace Study101Project
             // 
             this.listView1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(557, 398);
+            this.listView1.Location = new System.Drawing.Point(557, 39);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(456, 241);
             this.listView1.TabIndex = 5;

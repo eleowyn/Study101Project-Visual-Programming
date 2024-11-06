@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="dataGridView1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="textBox1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABCYAAAKvCAYAAAC2xM4VAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAA/7JJREFUeF7s/dnXdll21QfWf2RAQEqZSmWfERl9ZvQZfWRk36gDCQTIYExBlSls
+        vgAADr4B6kKxwAAA/7JJREFUeF7s/dnXdll21QfWf2RAQEqZSmWfERl9ZvQZfWRk36gDCQTIYExBlSls
         1zCgLjtlr0wplY0aJNm4qMYwRnHFGFXYGIrGZthQNOpVN/HWnnOtufba+5zn/UJCTTwe8+I31jrP98V7
         9pt5nov1++be53938//79RtjjDHGGGOMuW5+9ebmN/+/Ny//+r+8efnX/tnNy7/6T25e/pX/4eblX/6H
         g//3zcv/Hvy//oP5X/7eN26+/MzDN59/+J7kXvKFR+4bjH6AGuCzwaPxZ194FOT1wv3ki4+d8UAy+sdH

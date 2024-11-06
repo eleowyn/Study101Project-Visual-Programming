@@ -19,7 +19,22 @@ namespace Study101Project
         public Tracker()
         {
             InitializeComponent();
+            InitializeFlowLayoutPanels();
             LoadSubjects();
+        }
+
+        private void InitializeFlowLayoutPanels()
+        {
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel1.WrapContents = true;
+            flowLayoutPanel1.AutoScroll = true;
+
+            // Configure flowLayoutPanel4 for vertical layout
+            flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
+            flowLayoutPanel4.WrapContents = false;
+            flowLayoutPanel4.AutoScroll = true;
+            flowLayoutPanel4.AutoSize = true;
+            flowLayoutPanel4.Padding = new Padding(10);
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -79,7 +94,8 @@ namespace Study101Project
 
         private void LoadSubjects()
         {
-            listBox1.Items.Clear();
+            flowLayoutPanel1.Controls.Clear();
+
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 try
@@ -92,7 +108,19 @@ namespace Study101Project
 
                     while (reader.Read())
                     {
-                        listBox1.Items.Add(reader["subject_name"].ToString());
+                        string subjectName = reader["subject_name"].ToString();
+                        Button subjectButton = new Button
+                        {
+                            Text = subjectName,
+                            AutoSize = true,
+                            Margin = new Padding(5),
+                            Font = new Font("Century Gothic", 8, FontStyle.Regular),
+                            BackColor = Color.FloralWhite,
+                            FlatStyle = FlatStyle.Flat,
+                        };
+                        subjectButton.Click += (sender, e) => LoadSubjectWeights(subjectName);
+
+                        flowLayoutPanel1.Controls.Add(subjectButton);
                     }
                 }
                 catch (Exception ex)
@@ -120,17 +148,77 @@ namespace Study101Project
             this.Close();
         }
 
+        private void LoadSubjectWeights(string subjectName)
+        {
+            flowLayoutPanel4.Controls.Clear();
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string query = @"SELECT assignment_weight, quiz_weight, test_weight, mid_weight, 
+                           final_weight, project_weight 
+                           FROM tbl_subjects 
+                           WHERE user_id = @userId AND subject_name = @subjectName";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                    cmd.Parameters.AddWithValue("@subjectName", subjectName);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        string[] categories = { "Assignment", "Quiz", "Test", "Midterm", "Final", "Project" };
+                        float[] weights = {
+                    Convert.ToSingle(reader["assignment_weight"]),
+                    Convert.ToSingle(reader["quiz_weight"]),
+                    Convert.ToSingle(reader["test_weight"]),
+                    Convert.ToSingle(reader["mid_weight"]),
+                    Convert.ToSingle(reader["final_weight"]),
+                    Convert.ToSingle(reader["project_weight"])
+                };
+
+                        ListView listView = new ListView
+                        {
+                            View = View.Details,
+                            Width = flowLayoutPanel4.Width - 20,
+                            Height = flowLayoutPanel4.Height - 20,
+                            Font = new Font("Century Gothic", 10, FontStyle.Regular),
+                            BackColor = Color.MistyRose,
+                            Visible = true
+                        };
+
+                        listView.Columns.Add("Category", 150);
+                        listView.Columns.Add("Weight (%)", 100);
+
+                        for (int i = 0; i < categories.Length; i++)
+                        {
+                            ListViewItem item = new ListViewItem(categories[i]);
+                            item.SubItems.Add(weights[i].ToString("F2") + "%");
+                            listView.Items.Add(item);
+                        }
+
+                        flowLayoutPanel4.Controls.Add(listView);
+                        listView.BringToFront();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No weights found for subject: " + subjectName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading subject weights: " + ex.Message);
+                }
+            }
+        }
+
         private void textBoxSubject_TextChanged(object sender, EventArgs e)
         {
             
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             
         }
@@ -196,6 +284,16 @@ namespace Study101Project
         }
 
         private void numericUpDownProject_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void flowLayoutPanel4_Paint(object sender, PaintEventArgs e)
         {
 
         }
