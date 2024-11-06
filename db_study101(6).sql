@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 02:58 PM
+-- Generation Time: Nov 06, 2024 at 08:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -31,7 +31,8 @@ CREATE TABLE `tbl_brainhack` (
   `brainhack_id` int(11) NOT NULL,
   `brainhack_pomodoro` time NOT NULL,
   `brainhack_flashcard` varchar(300) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `usersession` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -45,8 +46,21 @@ CREATE TABLE `tbl_calender` (
   `calender_title` varchar(30) NOT NULL,
   `calender_content` varchar(500) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `calender_date` datetime NOT NULL
+  `calender_date` date NOT NULL,
+  `usersession` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_calender`
+--
+
+INSERT INTO `tbl_calender` (`calender_id`, `calender_title`, `calender_content`, `user_id`, `calender_date`, `usersession`) VALUES
+(15, 'vispro', 'Sample Content', 1, '2024-10-29', 0),
+(16, 'visproo', 'Sample Content', 1, '2024-10-29', 0),
+(18, 'presentasi-hci', 'Sample Content', 1, '2024-11-12', 0),
+(19, 'presentasi-vispro', 'Sample Content', 2, '2024-11-13', 0),
+(21, 'mama pe ultah', 'Sample Content', 2, '2024-11-25', 0),
+(22, 'oma pe ultah', 'Sample Content', 1, '2024-11-11', 0);
 
 -- --------------------------------------------------------
 
@@ -59,15 +73,18 @@ CREATE TABLE `tbl_diary` (
   `diary_title` varchar(30) NOT NULL,
   `diary_content` varchar(1000) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `diary_date` datetime NOT NULL
+  `diary_date` datetime NOT NULL,
+  `usersession` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_diary`
 --
 
-INSERT INTO `tbl_diary` (`diary_id`, `diary_title`, `diary_content`, `user_id`, `diary_date`) VALUES
-(1, 'elshera\'s first diary', 'testtt', 1, '2024-10-24 20:32:49');
+INSERT INTO `tbl_diary` (`diary_id`, `diary_title`, `diary_content`, `user_id`, `diary_date`, `usersession`) VALUES
+(2, 'presentasi', 'vispro', 1, '2024-10-28 13:57:19', 0),
+(3, 'test 1 a', 'halo nama say a', 2, '2024-11-06 11:51:35', 0),
+(4, 'blabla', 'p', 1, '2024-11-06 11:52:28', 0);
 
 -- --------------------------------------------------------
 
@@ -76,10 +93,23 @@ INSERT INTO `tbl_diary` (`diary_id`, `diary_title`, `diary_content`, `user_id`, 
 --
 
 CREATE TABLE `tbl_scoree` (
-  `subjectID` int(11) NOT NULL,
+  `score_id` int(11) NOT NULL,
   `task_name` int(11) NOT NULL,
-  `Score` int(11) NOT NULL
+  `score` int(11) NOT NULL,
+  `subject_type` varchar(30) NOT NULL,
+  `subject_name` varchar(30) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `usersession` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_scoree`
+--
+
+INSERT INTO `tbl_scoree` (`score_id`, `task_name`, `score`, `subject_type`, `subject_name`, `user_id`, `usersession`) VALUES
+(1, 0, 100, '', '', 0, 0),
+(2, 0, 100, '', '', 0, 0),
+(4, 0, 100, '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -96,8 +126,28 @@ CREATE TABLE `tbl_subjects` (
   `midterm_score` int(11) NOT NULL,
   `final_score` int(11) NOT NULL,
   `project_score` int(11) NOT NULL,
-  `test_score` int(11) NOT NULL
+  `test_score` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `usersession` int(11) NOT NULL,
+  `assigment_weight` float NOT NULL,
+  `quiz_weight` float NOT NULL,
+  `test_weight` float NOT NULL,
+  `mid_weight` float NOT NULL,
+  `final_weight` float NOT NULL,
+  `project_weight` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_subjects`
+--
+
+INSERT INTO `tbl_subjects` (`subject_id`, `subject_name`, `subject_type`, `assignment_score`, `quiz_score`, `midterm_score`, `final_score`, `project_score`, `test_score`, `user_id`, `usersession`, `assigment_weight`, `quiz_weight`, `test_weight`, `mid_weight`, `final_weight`, `project_weight`) VALUES
+(1, 'visual programming', '', 110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 'front-end', '', 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 'sad', '', 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(4, 'hci', '', 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(5, 'hcii', '', 50, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0),
+(6, 'frontend', '', 0, 0, 0, 0, 50, 0, 1, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -112,15 +162,17 @@ CREATE TABLE `tbl_task` (
   `task_status` varchar(30) NOT NULL,
   `task_todo` varchar(30) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `task_type` varchar(50) NOT NULL
+  `task_type` varchar(50) NOT NULL,
+  `usersession` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_task`
 --
 
-INSERT INTO `tbl_task` (`task_id`, `task_title`, `task_duedate`, `task_status`, `task_todo`, `user_id`, `task_type`) VALUES
-(2, 'hci-figma', '2024-10-24 00:00:00', '', '', 1, 'Assignments');
+INSERT INTO `tbl_task` (`task_id`, `task_title`, `task_duedate`, `task_status`, `task_todo`, `user_id`, `task_type`, `usersession`) VALUES
+(11, 'my date', '2024-11-18 00:00:00', '', '', 2, '', 0),
+(12, 'ito pe ultah', '2024-11-18 00:00:00', '', '', 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -131,17 +183,18 @@ INSERT INTO `tbl_task` (`task_id`, `task_title`, `task_duedate`, `task_status`, 
 CREATE TABLE `tbl_user` (
   `user_id` int(11) NOT NULL,
   `user_name` varchar(30) NOT NULL,
-  `usere_email` varchar(30) NOT NULL,
-  `user_password` varchar(20) NOT NULL
+  `user_email` varchar(30) NOT NULL,
+  `user_password` varchar(20) NOT NULL,
+  `user_username` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`user_id`, `user_name`, `usere_email`, `user_password`) VALUES
-(1, 'elshera', 'elshera.dahlan@gmail.com', 'elshera18'),
-(2, 'a', 'a', 'a');
+INSERT INTO `tbl_user` (`user_id`, `user_name`, `user_email`, `user_password`, `user_username`) VALUES
+(1, 'elshera', 'elshera.dahlan@gmail.com', 'elshera18', 'elsherawyn'),
+(2, 'elshera2', 'a', 'a', 'a');
 
 --
 -- Indexes for dumped tables
@@ -167,6 +220,12 @@ ALTER TABLE `tbl_calender`
 ALTER TABLE `tbl_diary`
   ADD PRIMARY KEY (`diary_id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `tbl_scoree`
+--
+ALTER TABLE `tbl_scoree`
+  ADD PRIMARY KEY (`score_id`);
 
 --
 -- Indexes for table `tbl_subjects`
@@ -201,25 +260,31 @@ ALTER TABLE `tbl_brainhack`
 -- AUTO_INCREMENT for table `tbl_calender`
 --
 ALTER TABLE `tbl_calender`
-  MODIFY `calender_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `calender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_diary`
 --
 ALTER TABLE `tbl_diary`
-  MODIFY `diary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `diary_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_scoree`
+--
+ALTER TABLE `tbl_scoree`
+  MODIFY `score_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_subjects`
 --
 ALTER TABLE `tbl_subjects`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_task`
 --
 ALTER TABLE `tbl_task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
@@ -253,7 +318,7 @@ ALTER TABLE `tbl_diary`
 -- Constraints for table `tbl_task`
 --
 ALTER TABLE `tbl_task`
-  ADD CONSTRAINT `tbl_task_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tbl_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `tbl_user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
