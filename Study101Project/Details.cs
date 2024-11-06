@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static Study101Project.Form1;
 
 namespace Study101Project
 {
@@ -15,7 +16,16 @@ namespace Study101Project
             InitializeComponent();
         }
 
+        private void InitializeListViews()
+        {
+            listView1.View = View.Details;
+            listView1.Columns.Add("Subject", 150);
+            listView1.Columns.Add("Overall Score", 100);
 
+            listView2.View = View.Details;
+            listView2.Columns.Add("Category", 150);
+            listView2.Columns.Add("Overall Score", 100);
+        }
         private void Details_Load(object sender, EventArgs e)
         {
 
@@ -54,11 +64,7 @@ namespace Study101Project
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listView1.SelectedItems.Count > 0)
-            {
-                string selectedSubject = listView1.SelectedItems[0].Text;
-                LoadSubjectScores(selectedSubject);
-            }
+            LoadSubjectScores();
         }
 
         private void LoadOverallScores()
@@ -70,20 +76,34 @@ namespace Study101Project
                 try
                 {
                     conn.Open();
-                    string query = "SELECT subject_name, assignment_score, quiz_score, test_score, midterm_score, final_score, project_score FROM tbl_subjects";
+                    string query = @"SELECT subject_name, 
+                                    SUM(CASE WHEN subject_type = 'Assignment' THEN score END) AS assignment_score,
+                                    SUM(CASE WHEN subject_type = 'Quiz' THEN score END) AS quiz_score,
+                                    SUM(CASE WHEN subject_type = 'Test' THEN score END) AS test_score,
+                                    SUM(CASE WHEN subject_type = 'Midterm' THEN score END) AS midterm_score,
+                                    SUM(CASE WHEN subject_type = 'Final' THEN score END) AS final_score,
+                                    SUM(CASE WHEN subject_type = 'Project' THEN score END) AS project_score
+                             FROM tbl_scoree WHERE user_id = @userId GROUP BY subject_name";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
                     MySqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        ListViewItem item = new ListViewItem(reader["subject_name"].ToString());
-                        item.SubItems.Add(reader["assignment_score"].ToString());
-                        item.SubItems.Add(reader["quiz_score"].ToString());
-                        item.SubItems.Add(reader["test_score"].ToString());
-                        item.SubItems.Add(reader["midterm_score"].ToString());
-                        item.SubItems.Add(reader["final_score"].ToString());
-                        item.SubItems.Add(reader["project_score"].ToString());
+                        string subjectName = reader["subject_name"].ToString();
+                        float assignmentScore = reader["assignment_score"] != DBNull.Value ? Convert.ToSingle(reader["assignment_score"]) : 0;
+                        float quizScore = reader["quiz_score"] != DBNull.Value ? Convert.ToSingle(reader["quiz_score"]) : 0;
+                        float testScore = reader["test_score"] != DBNull.Value ? Convert.ToSingle(reader["test_score"]) : 0;
+                        float midtermScore = reader["midterm_score"] != DBNull.Value ? Convert.ToSingle(reader["midterm_score"]) : 0;
+                        float finalScore = reader["final_score"] != DBNull.Value ? Convert.ToSingle(reader["final_score"]) : 0;
+                        float projectScore = reader["project_score"] != DBNull.Value ? Convert.ToSingle(reader["project_score"]) : 0;
 
+                        // Calculate weighted score
+                        float overallScore = (assignmentScore * 0.2f) + (quizScore * 0.1f) + (testScore * 0.2f) +
+                                             (midtermScore * 0.2f) + (finalScore * 0.2f) + (projectScore * 0.1f);
+
+                        ListViewItem item = new ListViewItem(subjectName);
+                        item.SubItems.Add($"{overallScore:0.00}%");
                         listView1.Items.Add(item);
                     }
                 }
@@ -94,40 +114,39 @@ namespace Study101Project
             }
         }
 
-        private void LoadSubjectScores(string subjectName)
+        private void LoadSubjectScores()
         {
             listView2.Items.Clear();
+
             using (MySqlConnection conn = new MySqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
-                    string query = "SELECT task_name, Score FROM tbl_scoree WHERE subject_id = (SELECT subject_id FROM tbl_subjects WHERE subject_name = @subjectName)";
+                    string query = @"SELECT SUM(assignment_score * assignment_weight) AS Assignment, 
+                                    SUM(quiz_score * quiz_weight) AS Quiz, 
+                                    SUM(test_score * test_weight) AS Test, 
+                                    SUM(midterm_score * mid_weight) AS Midterm, 
+                                    SUM(final_score * final_weight) AS Final, 
+                                    SUM(project_score * project_weight) AS Project 
+                             FROM tbl_subjects WHERE user_id = @userId";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@subjectName", subjectName);
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
                     MySqlDataReader reader = cmd.ExecuteReader();
 
-                    float totalScore = 0;
-                    int count = 0;
-
-                    while (reader.Read())
+                    if (reader.Read())
                     {
-                        ListViewItem item = new ListViewItem(reader["Task_name"].ToString());
-                        float score = Convert.ToSingle(reader["Score"]);
-                        item.SubItems.Add(score.ToString());
-
-                        totalScore += score;
-                        count++;
-
-                        listView2.Items.Add(item);
+                        listView2.Items.Add(new ListViewItem(new[] { "Assignment", $"{reader["Assignment"]:0.00}%" }));
+                        listView2.Items.Add(new ListViewItem(new[] { "Quiz", $"{reader["Quiz"]:0.00}%" }));
+                        listView2.Items.Add(new ListViewItem(new[] { "Test", $"{reader["Test"]:0.00}%" }));
+                        listView2.Items.Add(new ListViewItem(new[] { "Midterm", $"{reader["Midterm"]:0.00}%" }));
+                        listView2.Items.Add(new ListViewItem(new[] { "Final", $"{reader["Final"]:0.00}%" }));
+                        listView2.Items.Add(new ListViewItem(new[] { "Project", $"{reader["Project"]:0.00}%" }));
                     }
-
-                    float overallScore = count > 0 ? totalScore / count : 0;
-                    MessageBox.Show($"Overall Score for {subjectName}: {overallScore}");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error loading individual scores: {ex.Message}");
+                    MessageBox.Show($"Error loading category scores: {ex.Message}");
                 }
             }
         }
@@ -161,18 +180,19 @@ namespace Study101Project
                 try
                 {
                     conn.Open();
-                    string query = @"INSERT INTO tbl_scoree (subject_id, Task_name, Score) 
-                                     VALUES ((SELECT subject_id FROM tbl_subjects WHERE subject_name = @subject), @taskName, @score); 
-                                     UPDATE tbl_subjects SET " + category.ToLower() + "_score = " + category.ToLower() + "_score + @score WHERE subject_name = @subject";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@subject", subject);
-                    cmd.Parameters.AddWithValue("@taskName", taskName);
-                    cmd.Parameters.AddWithValue("@score", score);
-                    cmd.ExecuteNonQuery();
+                    string insertScoreQuery = @"INSERT INTO tbl_scoree (subject_name, subject_type, task_name, score, user_id) 
+                                        VALUES (@subject, @category, @taskName, @score, @userId)";
+                    MySqlCommand insertCmd = new MySqlCommand(insertScoreQuery, conn);
+                    insertCmd.Parameters.AddWithValue("@subject", subject);
+                    insertCmd.Parameters.AddWithValue("@category", category);
+                    insertCmd.Parameters.AddWithValue("@taskName", taskName);
+                    insertCmd.Parameters.AddWithValue("@score", score);
+                    insertCmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                    insertCmd.ExecuteNonQuery();
 
                     MessageBox.Show("Score added successfully.");
                     LoadOverallScores();
-                    LoadSubjectScores(subject);
+                    LoadSubjectScores();
                 }
                 catch (Exception ex)
                 {
@@ -199,11 +219,6 @@ namespace Study101Project
 
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -220,6 +235,16 @@ namespace Study101Project
         private void buttonDelete_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadSubjectScores();
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadSubjectScores();
         }
     }
 }

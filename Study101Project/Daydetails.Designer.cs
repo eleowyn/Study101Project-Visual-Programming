@@ -77,6 +77,7 @@
             this.Name = "Daydetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Daydetails";
+            this.Load += new System.EventHandler(this.Daydetails_Load);
             this.ResumeLayout(false);
 
         }

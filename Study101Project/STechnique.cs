@@ -122,7 +122,6 @@ namespace Study101Project
             this.Close();
         }
 
-        // Flashcard class
         public class Flashcard
         {
             public string Question { get; set; }
@@ -135,13 +134,12 @@ namespace Study101Project
             }
         }
 
-        // Display current flashcard
         private void DisplayFlashcard()
         {
             if (flashcards.Count > 0)
             {
                 lblQuestion.Text = flashcards[currentIndex].Question;
-                lblAnswer.Text = ""; // Hide the answer initially
+                lblAnswer.Text = "";
             }
             else
             {
@@ -189,7 +187,7 @@ namespace Study101Project
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     flashcards.Add(new Flashcard(form.QuestionText, form.AnswerText));
-                    currentIndex = flashcards.Count - 1; // Set to the latest added flashcard
+                    currentIndex = flashcards.Count - 1;
                     DisplayFlashcard();
                 }
             }

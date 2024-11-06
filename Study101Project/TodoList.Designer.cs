@@ -51,7 +51,7 @@
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(542, 135);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(547, 463);
+            this.checkedListBox1.Size = new System.Drawing.Size(547, 454);
             this.checkedListBox1.TabIndex = 8;
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
@@ -217,6 +217,7 @@
             this.Name = "TodoList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TodoList";
+            this.Load += new System.EventHandler(this.TodoList_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -44,16 +44,16 @@
             this.numericUpDownHours = new System.Windows.Forms.NumericUpDown();
             this.labelPomodoro = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblTemplateA = new System.Windows.Forms.Label();
+            this.lblTemplateQ = new System.Windows.Forms.Label();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnAddFlashcard = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.lblAnswer = new System.Windows.Forms.Label();
+            this.btnFlip = new System.Windows.Forms.Button();
             this.lblQuestion = new System.Windows.Forms.Label();
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.btnFlip = new System.Windows.Forms.Button();
-            this.lblAnswer = new System.Windows.Forms.Label();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnAddFlashcard = new System.Windows.Forms.Button();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.lblTemplateQ = new System.Windows.Forms.Label();
-            this.lblTemplateA = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinutes)).BeginInit();
@@ -77,7 +77,7 @@
             this.groupBox1.Controls.Add(this.numericUpDownMinutes);
             this.groupBox1.Controls.Add(this.numericUpDownHours);
             this.groupBox1.Controls.Add(this.labelPomodoro);
-            this.groupBox1.Location = new System.Drawing.Point(28, 78);
+            this.groupBox1.Location = new System.Drawing.Point(35, 107);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(504, 468);
             this.groupBox1.TabIndex = 0;
@@ -211,21 +211,96 @@
             this.groupBox2.Controls.Add(this.lblAnswer);
             this.groupBox2.Controls.Add(this.btnFlip);
             this.groupBox2.Controls.Add(this.lblQuestion);
-            this.groupBox2.Location = new System.Drawing.Point(548, 78);
+            this.groupBox2.Location = new System.Drawing.Point(572, 107);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(502, 468);
+            this.groupBox2.Size = new System.Drawing.Size(642, 468);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Flashcards";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // lblTemplateA
+            // 
+            this.lblTemplateA.AutoSize = true;
+            this.lblTemplateA.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTemplateA.Location = new System.Drawing.Point(28, 150);
+            this.lblTemplateA.Name = "lblTemplateA";
+            this.lblTemplateA.Size = new System.Drawing.Size(82, 23);
+            this.lblTemplateA.TabIndex = 7;
+            this.lblTemplateA.Text = "Answer";
+            // 
+            // lblTemplateQ
+            // 
+            this.lblTemplateQ.AutoSize = true;
+            this.lblTemplateQ.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTemplateQ.Location = new System.Drawing.Point(28, 71);
+            this.lblTemplateQ.Name = "lblTemplateQ";
+            this.lblTemplateQ.Size = new System.Drawing.Size(95, 23);
+            this.lblTemplateQ.TabIndex = 6;
+            this.lblTemplateQ.Text = "Question";
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrevious.Location = new System.Drawing.Point(180, 410);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(140, 40);
+            this.btnPrevious.TabIndex = 5;
+            this.btnPrevious.Text = "Previous";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnAddFlashcard
+            // 
+            this.btnAddFlashcard.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddFlashcard.Location = new System.Drawing.Point(262, 325);
+            this.btnAddFlashcard.Name = "btnAddFlashcard";
+            this.btnAddFlashcard.Size = new System.Drawing.Size(140, 40);
+            this.btnAddFlashcard.TabIndex = 4;
+            this.btnAddFlashcard.Text = "Add";
+            this.btnAddFlashcard.UseVisualStyleBackColor = true;
+            this.btnAddFlashcard.Click += new System.EventHandler(this.btnAddFlashcard_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(361, 410);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(140, 40);
+            this.btnNext.TabIndex = 3;
+            this.btnNext.Text = "Next";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // lblAnswer
+            // 
+            this.lblAnswer.AutoSize = true;
+            this.lblAnswer.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnswer.Location = new System.Drawing.Point(135, 150);
+            this.lblAnswer.Name = "lblAnswer";
+            this.lblAnswer.Size = new System.Drawing.Size(70, 19);
+            this.lblAnswer.TabIndex = 2;
+            this.lblAnswer.Text = "Answer";
+            this.lblAnswer.Click += new System.EventHandler(this.lblAnswer_Click);
+            // 
+            // btnFlip
+            // 
+            this.btnFlip.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFlip.Location = new System.Drawing.Point(262, 279);
+            this.btnFlip.Name = "btnFlip";
+            this.btnFlip.Size = new System.Drawing.Size(140, 40);
+            this.btnFlip.TabIndex = 1;
+            this.btnFlip.Text = "Answer";
+            this.btnFlip.UseVisualStyleBackColor = true;
+            this.btnFlip.Click += new System.EventHandler(this.btnFlip_Click);
+            // 
             // lblQuestion
             // 
             this.lblQuestion.AutoSize = true;
-            this.lblQuestion.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQuestion.Location = new System.Drawing.Point(223, 71);
+            this.lblQuestion.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestion.Location = new System.Drawing.Point(135, 71);
             this.lblQuestion.Name = "lblQuestion";
-            this.lblQuestion.Size = new System.Drawing.Size(97, 23);
+            this.lblQuestion.Size = new System.Drawing.Size(81, 19);
             this.lblQuestion.TabIndex = 0;
             this.lblQuestion.Text = "Question";
             this.lblQuestion.Click += new System.EventHandler(this.lblQuestion_Click);
@@ -238,7 +313,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(28, 587);
+            this.button1.Location = new System.Drawing.Point(35, 620);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 30);
             this.button1.TabIndex = 2;
@@ -246,87 +321,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnFlip
-            // 
-            this.btnFlip.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFlip.Location = new System.Drawing.Point(187, 279);
-            this.btnFlip.Name = "btnFlip";
-            this.btnFlip.Size = new System.Drawing.Size(140, 40);
-            this.btnFlip.TabIndex = 1;
-            this.btnFlip.Text = "Answer";
-            this.btnFlip.UseVisualStyleBackColor = true;
-            this.btnFlip.Click += new System.EventHandler(this.btnFlip_Click);
-            // 
-            // lblAnswer
-            // 
-            this.lblAnswer.AutoSize = true;
-            this.lblAnswer.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAnswer.Location = new System.Drawing.Point(223, 163);
-            this.lblAnswer.Name = "lblAnswer";
-            this.lblAnswer.Size = new System.Drawing.Size(81, 23);
-            this.lblAnswer.TabIndex = 2;
-            this.lblAnswer.Text = "Answer";
-            this.lblAnswer.Click += new System.EventHandler(this.lblAnswer_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.Location = new System.Drawing.Point(286, 410);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(140, 40);
-            this.btnNext.TabIndex = 3;
-            this.btnNext.Text = "Next";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnAddFlashcard
-            // 
-            this.btnAddFlashcard.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddFlashcard.Location = new System.Drawing.Point(187, 325);
-            this.btnAddFlashcard.Name = "btnAddFlashcard";
-            this.btnAddFlashcard.Size = new System.Drawing.Size(140, 40);
-            this.btnAddFlashcard.TabIndex = 4;
-            this.btnAddFlashcard.Text = "Add";
-            this.btnAddFlashcard.UseVisualStyleBackColor = true;
-            this.btnAddFlashcard.Click += new System.EventHandler(this.btnAddFlashcard_Click);
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPrevious.Location = new System.Drawing.Point(105, 410);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(140, 40);
-            this.btnPrevious.TabIndex = 5;
-            this.btnPrevious.Text = "Previous";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // lblTemplateQ
-            // 
-            this.lblTemplateQ.AutoSize = true;
-            this.lblTemplateQ.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTemplateQ.Location = new System.Drawing.Point(28, 71);
-            this.lblTemplateQ.Name = "lblTemplateQ";
-            this.lblTemplateQ.Size = new System.Drawing.Size(95, 23);
-            this.lblTemplateQ.TabIndex = 6;
-            this.lblTemplateQ.Text = "Question";
-            // 
-            // lblTemplateA
-            // 
-            this.lblTemplateA.AutoSize = true;
-            this.lblTemplateA.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTemplateA.Location = new System.Drawing.Point(28, 150);
-            this.lblTemplateA.Name = "lblTemplateA";
-            this.lblTemplateA.Size = new System.Drawing.Size(82, 23);
-            this.lblTemplateA.TabIndex = 7;
-            this.lblTemplateA.Text = "Answer";
-            // 
             // STechnique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1062, 630);
+            this.ClientSize = new System.Drawing.Size(1261, 689);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

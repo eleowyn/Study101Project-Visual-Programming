@@ -19,14 +19,85 @@ namespace Study101Project
         private MySqlConnection koneksi;
         private MySqlDataAdapter adapter;
         private MySqlCommand perintah;
-
         private DataSet ds = new DataSet();
         private string alamat, query;
+
+        // Class to hold user session data
+        public class UserSession
+        {
+            public static string user_username { get; set; }
+            public static string user_id { get; set; }
+            public static string user_name { get; set; }
+            public static string user_email { get; set; }
+            public static string user_password { get; set; }
+
+            public static void SetUserData(string userName, string userId, string username, string userEmail, string userPassword)
+            {
+                user_username = userName;
+                user_id = userId;
+                user_name = username;
+                user_email = userEmail;
+            }
+        }
+
         public Form1()
         {
             alamat = "server=localhost; database=db_study101; username=root; password=;";
             koneksi = new MySqlConnection(alamat);
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string userInput = txtUsername.Text.Trim();
+                query = string.Format("SELECT * FROM tbl_user WHERE user_username = '{0}' OR user_email = '{0}'", userInput);
+                ds.Clear();
+                koneksi.Open();
+                perintah = new MySqlCommand(query, koneksi);
+                adapter = new MySqlDataAdapter(perintah);
+                adapter.Fill(ds);
+                koneksi.Close();
+
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    DataRow kolom = ds.Tables[0].Rows[0]; // Ambil hanya baris pertama
+                    string sandi = kolom["user_password"].ToString();
+
+                    if (sandi == txtPassword.Text)
+                    {
+                        // Menyimpan data sesuai dengan jenis login
+
+                        UserSession.user_password = kolom["user_password"].ToString();
+                        UserSession.user_email = kolom["user_email"].ToString();
+                        UserSession.user_username = kolom["user_username"].ToString();
+                        UserSession.user_name = kolom["user_name"].ToString();
+                        UserSession.user_id = kolom["user_id"].ToString();
+
+                        Dashboard dashboard = new Dashboard();
+                        dashboard.Show();
+                        this.Hide(); // Sembunyikan form login jika diperlukan
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong Password");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username or Email Not Found");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                if (koneksi.State == ConnectionState.Open)
+                    koneksi.Close();
+            }
         }
 
         private void lblUsername_Click(object sender, EventArgs e)
@@ -40,46 +111,18 @@ namespace Study101Project
             txtPassword.Text = string.Empty;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void txtPassword_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                query = string.Format("select * from tbl_user where user_name = '{0}'", txtUsername.Text);
-                ds.Clear();
-                koneksi.Open();
-                perintah = new MySqlCommand(query, koneksi);
-                adapter = new MySqlDataAdapter(perintah);
-                perintah.ExecuteNonQuery();
-                adapter.Fill(ds);
-                koneksi.Close();
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow kolom in ds.Tables[0].Rows)
-                    {
-                        string sandi;
-                        sandi = kolom["user_password"].ToString();
-                        if (sandi == txtPassword.Text)
-                        {
-                            Dashboard frmMain = new Dashboard();
-                            frmMain.Show();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Anda salah input password");
-                        }
-                    }
 
-                }
-                else
-                {
-                    MessageBox.Show("Username tidak ditemukan");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-                
-            } 
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
     }
 }

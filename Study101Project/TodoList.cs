@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using static Study101Project.Form1;
 
 namespace Study101Project
 {
@@ -21,68 +22,15 @@ namespace Study101Project
         private MySqlCommand perintah;
         private DataSet ds = new DataSet();
         private string alamat, query;
+        private int userId;
 
         public TodoList()
         {
             alamat = "server=localhost; database=db_study101; username=root; password=;";
             koneksi = new MySqlConnection(alamat);
             InitializeComponent();
+            userId = int.Parse(UserSession.user_id);
             LoadTasks();
-        }
-
-        private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelBackTodo_Click(object sender, EventArgs e)
-        {
-            Dashboard dashboard = new Dashboard();
-            dashboard.Show();
-            this.Close();
-        }
-
-        private void labelDataTodo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelTodo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (checkedListBox1.SelectedItem != null && checkedListBox1.GetItemChecked(checkedListBox1.SelectedIndex))
-            {
-                string selectedTask = checkedListBox1.SelectedItem.ToString();
-
-                
-                string taskName = selectedTask.Split(new string[] { " (Due: " }, StringSplitOptions.None)[0];
-
-                
-                using (MySqlConnection conn = new MySqlConnection(alamat))
-                {
-                    conn.Open();
-                    string query = "DELETE FROM tbl_task WHERE task_title = @taskName";
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@taskName", taskName);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                
-                LoadTasks();
-
-                MessageBox.Show("Task deleted automatically after being checked from both To-Do list and Calendar.", "Task Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private void LoadTasks()
@@ -91,10 +39,11 @@ namespace Study101Project
             using (MySqlConnection conn = new MySqlConnection(alamat))
             {
                 conn.Open();
-                
-                string query = "SELECT task_title, task_duedate FROM tbl_task";
+
+                string query = "SELECT task_title, task_duedate FROM tbl_task WHERE user_id = @userId";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
+                    cmd.Parameters.AddWithValue("@userId", userId);
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -117,20 +66,45 @@ namespace Study101Project
                 using (MySqlConnection conn = new MySqlConnection(alamat))
                 {
                     conn.Open();
-
-                    string query = "INSERT INTO tbl_task (task_title, task_duedate) VALUES (@task, @dueDate)";
+                    string query = "INSERT INTO tbl_task (task_title, task_duedate, user_id) VALUES (@task, @dueDate, @userId)";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@task", task);
                         cmd.Parameters.AddWithValue("@dueDate", dueDate);
+                        cmd.Parameters.AddWithValue("@userId", userId);
                         cmd.ExecuteNonQuery();
                     }
+                    LoadTasks();
                 }
-                LoadTasks();
             }
             else
             {
                 MessageBox.Show("Please enter a task name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (checkedListBox1.SelectedItem != null && checkedListBox1.GetItemChecked(checkedListBox1.SelectedIndex))
+            {
+                string selectedTask = checkedListBox1.SelectedItem.ToString();
+                string taskName = selectedTask.Split(new string[] { " (Due: " }, StringSplitOptions.None)[0];
+
+                using (MySqlConnection conn = new MySqlConnection(alamat))
+                {
+                    conn.Open();
+                    string query = "DELETE FROM tbl_task WHERE task_title = @taskName AND user_id = @userId";
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@taskName", taskName);
+                        cmd.Parameters.AddWithValue("@userId", userId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                LoadTasks();
+
+                MessageBox.Show("Task deleted automatically after being checked from both To-Do list and Calendar.", "Task Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -141,14 +115,14 @@ namespace Study101Project
                 string selectedTask = checkedListBox1.SelectedItem.ToString();
                 string taskName = selectedTask.Split(new string[] { " (Due: " }, StringSplitOptions.None)[0];
 
-                
                 using (MySqlConnection conn = new MySqlConnection(alamat))
                 {
                     conn.Open();
-                    string query = "DELETE FROM tbl_task WHERE task_title = @taskName";
+                    string query = "DELETE FROM tbl_task WHERE task_title = @taskName AND user_id = @userId";
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@taskName", taskName);
+                        cmd.Parameters.AddWithValue("@userId", userId); // Delete only if task belongs to current user
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -161,23 +135,6 @@ namespace Study101Project
             {
                 MessageBox.Show("Please select a task to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void labelType_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Dashboard dashboard = new Dashboard();
-            dashboard.Show();
-            this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -194,10 +151,10 @@ namespace Study101Project
                     {
                         conn.Open();
 
-                        query = "SELECT task_title, task_duedate FROM tbl_task WHERE task_title LIKE @searchQuery";
-
+                        query = "SELECT task_title, task_duedate FROM tbl_task WHERE task_title LIKE @searchQuery AND user_id = @userId";
                         perintah = new MySqlCommand(query, conn);
                         perintah.Parameters.AddWithValue("@searchQuery", "%" + searchQuery + "%");
+                        perintah.Parameters.AddWithValue("@userId", userId);
 
                         adapter = new MySqlDataAdapter(perintah);
                         ds = new DataSet();
@@ -219,6 +176,43 @@ namespace Study101Project
             {
                 MessageBox.Show("Please enter a search term.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void labelType_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Close();
+        }
+
+        private void TodoList_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelDataTodo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelTodo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

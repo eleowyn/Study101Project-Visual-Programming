@@ -32,14 +32,12 @@ namespace Study101Project
 
         private void SetupGame()
         {
-            // Form settings
             this.Text = "Memory Game";
             this.Size = new Size(600, 600);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            // Create title label
             Label titleLabel = new Label
             {
                 Text = "Memory Card Game",
@@ -49,11 +47,9 @@ namespace Study101Project
             titleLabel.Location = new Point((this.ClientSize.Width - titleLabel.Width) / 2, 20);
             this.Controls.Add(titleLabel);
 
-            // Shuffle icons
             Random rand = new Random();
             icons = icons.OrderBy(x => rand.Next()).ToList();
 
-            // Create buttons (4x4 grid)
             int buttonSize = 80;
             int padding = 10;
             int startX = (this.ClientSize.Width - (4 * buttonSize + 3 * padding)) / 2;
@@ -82,7 +78,6 @@ namespace Study101Project
                 }
             }
 
-            // Add New Game button
             Button newGameButton = new Button
             {
                 Text = "New Game",
@@ -97,7 +92,6 @@ namespace Study101Project
             newGameButton.Click += NewGameButton_Click;
             this.Controls.Add(newGameButton);
 
-            // Setup timer
             timer.Interval = 750;
             timer.Tick += Timer_Tick;
         }
@@ -147,16 +141,13 @@ namespace Study101Project
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            // Reset game
             pairs = 0;
             firstClicked = null;
             secondClicked = null;
 
-            // Shuffle icons
             Random rand = new Random();
             icons = icons.OrderBy(x => rand.Next()).ToList();
 
-            // Reset buttons
             for (int i = 0; i < buttons.Count; i++)
             {
                 buttons[i].Text = "";
@@ -167,7 +158,7 @@ namespace Study101Project
 
         private void Game_Load(object sender, EventArgs e)
         {
-            // This can remain empty as we're handling everything in SetupGame
+            
         }
     }
 }

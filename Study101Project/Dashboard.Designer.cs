@@ -108,7 +108,7 @@
             // 
             this.monthCalendar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.monthCalendar1.BackColor = System.Drawing.SystemColors.Info;
-            this.monthCalendar1.Location = new System.Drawing.Point(395, 77);
+            this.monthCalendar1.Location = new System.Drawing.Point(395, 74);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 9;
             this.monthCalendar1.TitleBackColor = System.Drawing.SystemColors.ButtonHighlight;

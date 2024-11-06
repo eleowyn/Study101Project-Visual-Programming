@@ -3,13 +3,13 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using static Study101Project.Form1;
 
 namespace Study101Project
 {
     public partial class Diary : Form
     {
         private string connectionString = "server=localhost; database=db_study101; username=root; password=;";
-        private int currentUserId = 1;
 
         public Diary()
         {
@@ -30,7 +30,7 @@ namespace Study101Project
                 string query = "SELECT diary_id, diary_title, diary_date FROM tbl_diary WHERE user_id = @userId ORDER BY diary_date DESC";
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@userId", currentUserId);
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -63,7 +63,7 @@ namespace Study101Project
                 {
                     cmd.Parameters.AddWithValue("@title", title);
                     cmd.Parameters.AddWithValue("@content", content);
-                    cmd.Parameters.AddWithValue("@userId", currentUserId);
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.ExecuteNonQuery();
                 }
@@ -149,9 +149,10 @@ namespace Study101Project
             dashboard.Show();
             this.Close();
         }
+
         private void dateDiary_ValueChanged(object sender, EventArgs e)
         {
-            
+
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {

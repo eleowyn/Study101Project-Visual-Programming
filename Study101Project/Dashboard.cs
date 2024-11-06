@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,15 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Study101Project.Form1;
 
 namespace Study101Project
 {
     public partial class Dashboard : Form
     {
+        private string connectionString = "server=localhost; database=db_study101; username=root; password=;";
         public Dashboard()
         {
             InitializeComponent();
             this.Paint += new PaintEventHandler(DrawLine);
+            CustomizeDataGridView();
+            LoadTasks();
         }
         private void DrawLine(object sender, PaintEventArgs e)
         {
@@ -25,9 +30,6 @@ namespace Study101Project
             myPen.Dispose();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-                   }
 
         private void label2_Click_1(object sender, EventArgs e)
         {
@@ -44,7 +46,7 @@ namespace Study101Project
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-
+            LoadTasks();
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
@@ -109,9 +111,69 @@ namespace Study101Project
             this.Close();
         }
 
-        private void splitter1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
 
+        private void CustomizeDataGridView()
+        {
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dataGridView1.ColumnHeadersVisible = false; 
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.AllowUserToResizeRows = false;
+            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.ScrollBars = ScrollBars.None;
+
+            dataGridView1.DefaultCellStyle.BackColor = Color.White;
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 230);
+            dataGridView1.DefaultCellStyle.Padding = new Padding(10);
+
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
+
+            dataGridView1.Columns.Clear();
+            dataGridView1.Columns.Add("task_title", "Task Title");
+            dataGridView1.Columns.Add("task_duedate", "Due Date");
+
+            dataGridView1.Columns["task_title"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft;
+            dataGridView1.Columns["task_duedate"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomLeft;
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True; 
+            dataGridView1.RowTemplate.Height = 60;
+
+            dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
+            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
+        }
+
+
+        private void LoadTasks()
+        {
+            dataGridView1.Rows.Clear();
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    string query = "SELECT task_title, task_duedate, task_type FROM tbl_task WHERE user_id = @userId";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            dataGridView1.Rows.Add(
+                                reader["task_title"].ToString(),
+                                Convert.ToDateTime(reader["task_duedate"]).ToShortDateString(),
+                                reader["task_type"].ToString()
+                            );
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading tasks: " + ex.Message);
+                }
+            }
         }
     }
 }
