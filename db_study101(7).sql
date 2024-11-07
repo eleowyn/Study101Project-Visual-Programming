@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 08:35 AM
+-- Generation Time: Nov 06, 2024 at 03:02 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -94,7 +94,7 @@ INSERT INTO `tbl_diary` (`diary_id`, `diary_title`, `diary_content`, `user_id`, 
 
 CREATE TABLE `tbl_scoree` (
   `score_id` int(11) NOT NULL,
-  `task_name` int(11) NOT NULL,
+  `task_name` varchar(255) DEFAULT NULL,
   `score` int(11) NOT NULL,
   `subject_type` varchar(30) NOT NULL,
   `subject_name` varchar(30) NOT NULL,
@@ -107,9 +107,13 @@ CREATE TABLE `tbl_scoree` (
 --
 
 INSERT INTO `tbl_scoree` (`score_id`, `task_name`, `score`, `subject_type`, `subject_name`, `user_id`, `usersession`) VALUES
-(1, 0, 100, '', '', 0, 0),
-(2, 0, 100, '', '', 0, 0),
-(4, 0, 100, '', '', 0, 0);
+(1, '0', 100, '', '', 0, 0),
+(2, '0', 100, '', '', 0, 0),
+(4, '0', 100, '', '', 0, 0),
+(5, '0', 100, 'Assignment', 'front-end', 2, 0),
+(6, '0', 100, 'Assignment', 'front-end', 2, 0),
+(7, '0', 100, 'Quiz', 'hci', 2, 0),
+(8, '0', 100, 'Assignment', 'hci', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -129,25 +133,22 @@ CREATE TABLE `tbl_subjects` (
   `test_score` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `usersession` int(11) NOT NULL,
-  `assigment_weight` float NOT NULL,
   `quiz_weight` float NOT NULL,
   `test_weight` float NOT NULL,
   `mid_weight` float NOT NULL,
   `final_weight` float NOT NULL,
-  `project_weight` float NOT NULL
+  `project_weight` float NOT NULL,
+  `assignment_weight` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbl_subjects`
 --
 
-INSERT INTO `tbl_subjects` (`subject_id`, `subject_name`, `subject_type`, `assignment_score`, `quiz_score`, `midterm_score`, `final_score`, `project_score`, `test_score`, `user_id`, `usersession`, `assigment_weight`, `quiz_weight`, `test_weight`, `mid_weight`, `final_weight`, `project_weight`) VALUES
-(1, 'visual programming', '', 110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(2, 'front-end', '', 130, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(3, 'sad', '', 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(4, 'hci', '', 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(5, 'hcii', '', 50, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0),
-(6, 'frontend', '', 0, 0, 0, 0, 50, 0, 1, 0, 0, 0, 0, 0, 0, 0);
+INSERT INTO `tbl_subjects` (`subject_id`, `subject_name`, `subject_type`, `assignment_score`, `quiz_score`, `midterm_score`, `final_score`, `project_score`, `test_score`, `user_id`, `usersession`, `quiz_weight`, `test_weight`, `mid_weight`, `final_weight`, `project_weight`, `assignment_weight`) VALUES
+(8, 'front-end', '', 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 60, 0, 40),
+(9, 'visual programming', '', 0, 0, 0, 0, 0, 0, 1, 0, 10, 10, 10, 50, 0, 20),
+(10, 'hci', '', 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 50, 0, 50);
 
 -- --------------------------------------------------------
 
@@ -171,7 +172,6 @@ CREATE TABLE `tbl_task` (
 --
 
 INSERT INTO `tbl_task` (`task_id`, `task_title`, `task_duedate`, `task_status`, `task_todo`, `user_id`, `task_type`, `usersession`) VALUES
-(11, 'my date', '2024-11-18 00:00:00', '', '', 2, '', 0),
 (12, 'ito pe ultah', '2024-11-18 00:00:00', '', '', 1, '', 0);
 
 -- --------------------------------------------------------
@@ -272,13 +272,13 @@ ALTER TABLE `tbl_diary`
 -- AUTO_INCREMENT for table `tbl_scoree`
 --
 ALTER TABLE `tbl_scoree`
-  MODIFY `score_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `score_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_subjects`
 --
 ALTER TABLE `tbl_subjects`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_task`
