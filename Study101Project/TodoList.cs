@@ -210,6 +210,11 @@ namespace Study101Project
 
         }
 
+        private void lblProgress_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void labelTodo_Click(object sender, EventArgs e)
         {
 
