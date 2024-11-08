@@ -17,7 +17,9 @@ namespace Study101Project
         private string connectionString = "server=localhost; database=db_study101; username=root; password=;";
         public Dashboard()
         {
+            
             InitializeComponent();
+            lblName.Text = $"Hi, {UserSession.user_name}!";
             CustomizeDataGridView();
             LoadTasks();
             DisplayRandomQuote();
@@ -104,17 +106,17 @@ namespace Study101Project
         private void CustomizeDataGridView()
         {
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.DefaultCellStyle.Font = new Font("Arial", 10, FontStyle.Bold);
+            dataGridView1.DefaultCellStyle.Font = new Font("Century Gothic", 10);
             dataGridView1.ColumnHeadersVisible = false; 
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.AllowUserToResizeRows = false;
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridView1.EnableHeadersVisualStyles = false;
-            dataGridView1.ScrollBars = ScrollBars.None;
+            dataGridView1.ScrollBars = ScrollBars.Horizontal;
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.White;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 230);
+            dataGridView1.DefaultCellStyle.BackColor = Color.Beige;
+            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.FloralWhite;
             dataGridView1.DefaultCellStyle.Padding = new Padding(10);
 
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.White;
@@ -159,7 +161,7 @@ namespace Study101Project
 
                             if (dueDate < DateTime.Now)
                             {
-                                dataGridView1.Rows[rowIndex].DefaultCellStyle.BackColor = Color.LightCoral;
+                                dataGridView1.Rows[rowIndex].DefaultCellStyle.BackColor = Color.MistyRose;
                             }
                             else if ((dueDate - DateTime.Now).TotalDays < 7)
                             {
@@ -240,6 +242,18 @@ namespace Study101Project
             Random random = new Random();
             int index = random.Next(quotes.Count);
             textBox1.Text = quotes[index];
+        }
+
+        private void lblName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblLogout_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Close();
         }
     }
 }

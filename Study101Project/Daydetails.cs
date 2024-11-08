@@ -1,8 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
-using static Study101Project.Form1; // Assuming UserSession is defined in Form1
+using static Study101Project.Form1;
 
 namespace Study101Project
 {
@@ -14,7 +15,8 @@ namespace Study101Project
         public Daydetails()
         {
             InitializeComponent();
-            userId = int.Parse(UserSession.user_id); // Get the logged-in user's ID
+            ConfigureListView();
+            userId = int.Parse(UserSession.user_id);
             LoadEvents();
         }
 
@@ -31,7 +33,7 @@ namespace Study101Project
                     string query = "SELECT calender_title FROM tbl_calender WHERE DATE(calender_date) = @date AND user_id = @userId";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@date", queryDate);
-                    cmd.Parameters.AddWithValue("@userId", userId); // Filter by user_id
+                    cmd.Parameters.AddWithValue("@userId", userId);
 
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -81,7 +83,7 @@ namespace Study101Project
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@title", eventTitle);
                     cmd.Parameters.AddWithValue("@date", queryDate);
-                    cmd.Parameters.AddWithValue("@userId", userId); // Ensure only the user's events can be deleted
+                    cmd.Parameters.AddWithValue("@userId", userId);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected > 0)
@@ -102,17 +104,58 @@ namespace Study101Project
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // Add functionality for updating an event if required
+            Choose choose = new Choose();
+            choose.Show();
+            this.Close();
         }
 
         private void Daydetails_Load(object sender, EventArgs e)
         {
-            // Any additional initialization if needed
+            
         }
 
         private void listViewEvent_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Any additional initialization if needed
+            
+        }
+
+        private void ConfigureListView()
+        {
+            listViewEvent.View = View.Details;
+            listViewEvent.FullRowSelect = true;
+            listViewEvent.BorderStyle = BorderStyle.Fixed3D;
+            listViewEvent.GridLines = true;
+            listViewEvent.Font = new Font("Century Gothic", 16, FontStyle.Regular);
+            listViewEvent.ForeColor = Color.DarkSlateGray;
+            listViewEvent.BackColor = Color.MistyRose;
+            listViewEvent.HeaderStyle = ColumnHeaderStyle.None;
+
+            listViewEvent.Columns.Add("Event Title", -2, HorizontalAlignment.Left);
+
+            listViewEvent.OwnerDraw = true;
+            listViewEvent.DrawItem += ListViewEvent_DrawItem;
+        }
+
+        private void ListViewEvent_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            if (e.ItemIndex % 2 == 0)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(240, 248, 255)), e.Bounds);
+            }
+            else
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(255, 255, 255)), e.Bounds);
+            }
+
+            e.Graphics.DrawString(e.Item.Text, listViewEvent.Font, Brushes.DarkSlateGray, e.Bounds);
+
+            if (e.Item.Selected)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.LightSteelBlue), e.Bounds);
+                e.Graphics.DrawString(e.Item.Text, listViewEvent.Font, Brushes.Black, e.Bounds);
+            }
+
+            e.DrawFocusRectangle();
         }
     }
 }

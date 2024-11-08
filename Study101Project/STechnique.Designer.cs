@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(STechnique));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelDetik = new System.Windows.Forms.Label();
             this.labelMenit = new System.Windows.Forms.Label();
@@ -325,7 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::Study101Project.Properties.Resources.Screenshot_2024_10_13_230259;
             this.ClientSize = new System.Drawing.Size(1261, 689);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);

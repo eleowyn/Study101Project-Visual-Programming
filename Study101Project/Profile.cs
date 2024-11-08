@@ -21,7 +21,6 @@ namespace Study101Project
             LoadUserProfile();
         }
 
-
         private void LoadUserProfile()
         {
             try
@@ -29,7 +28,7 @@ namespace Study101Project
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "SELECT user_username, user_name, user_email FROM tbl_user WHERE user_id = @userId";
+                    string query = "SELECT user_username, user_name, user_email, user_password FROM tbl_user WHERE user_id = @userId";
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@userId", userId);
@@ -40,8 +39,11 @@ namespace Study101Project
                             {
                                 txtUserID.Text = userId.ToString();
                                 txtUsername.Text = reader["user_username"].ToString();
-                                txtName.Text = reader["user_name"].ToString(); 
+                                txtName.Text = reader["user_name"].ToString();
                                 txtEmail.Text = reader["user_email"].ToString();
+                                txtPassword.Text = reader["user_password"].ToString();
+
+                                lblHello.Text = $"Hi, {reader["user_name"]}";
 
                                 if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtEmail.Text))
                                 {
@@ -64,9 +66,9 @@ namespace Study101Project
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtUsername.Text))
+            if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtUsername.Text) || string.IsNullOrEmpty(txtPassword.Text))
             {
-                MessageBox.Show("Name, Email, and Username cannot be empty. Please fill them in.");
+                MessageBox.Show("Name, Email, Username, and Password cannot be empty. Please fill them in.");
                 return;
             }
 
@@ -75,12 +77,13 @@ namespace Study101Project
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "UPDATE tbl_user SET user_username = @userUsername, user_name = @userName, user_email = @userEmail WHERE user_id = @userId";
+                    string query = "UPDATE tbl_user SET user_username = @userUsername, user_name = @userName, user_email = @userEmail, user_password = @userPassword WHERE user_id = @userId";
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@userUsername", txtUsername.Text);
                         cmd.Parameters.AddWithValue("@userName", txtName.Text);
                         cmd.Parameters.AddWithValue("@userEmail", txtEmail.Text);
+                        cmd.Parameters.AddWithValue("@userPassword", txtPassword.Text);
                         cmd.Parameters.AddWithValue("@userId", userId);
 
                         cmd.ExecuteNonQuery();
@@ -132,6 +135,16 @@ namespace Study101Project
         }
 
         private void txtUserID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblHello_Click(object sender, EventArgs e)
         {
 
         }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TodoList));
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.labelTodo = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -215,7 +214,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::Study101Project.Properties.Resources.Screenshot_2024_10_13_230259;
             this.ClientSize = new System.Drawing.Size(1130, 678);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.btnBack);

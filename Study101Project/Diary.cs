@@ -43,37 +43,6 @@ namespace Study101Project
             }
         }
 
-        private void labelSaveDiary_Click(object sender, EventArgs e)
-        {
-            string title = textBoxName.Text;
-            string content = textBox1.Text;
-            DateTime date = dateDiary.Value;
-
-            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
-            {
-                MessageBox.Show("Please enter both title and content.");
-                return;
-            }
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                connection.Open();
-                string query = "INSERT INTO tbl_diary (diary_title, diary_content, user_id, diary_date) VALUES (@title, @content, @userId, @date)";
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@title", title);
-                    cmd.Parameters.AddWithValue("@content", content);
-                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
-                    cmd.Parameters.AddWithValue("@date", date);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            MessageBox.Show("Diary entry saved successfully.");
-            LoadDiaryEntries();
-            ClearFields();
-        }
-
         private void labelNewDiary_Click(object sender, EventArgs e)
         {
             ClearFields();
@@ -113,43 +82,6 @@ namespace Study101Project
             }
         }
 
-        private void labelDeleteDiary_Click(object sender, EventArgs e)
-        {
-            if (Diary_List.SelectedIndex != -1)
-            {
-                string selectedItem = Diary_List.SelectedItem.ToString();
-                int diaryId = int.Parse(selectedItem.Split('-').Last().Trim());
-
-                if (MessageBox.Show("Are you sure you want to delete this entry?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    using (MySqlConnection connection = new MySqlConnection(connectionString))
-                    {
-                        connection.Open();
-                        string query = "DELETE FROM tbl_diary WHERE diary_id = @diaryId";
-                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
-                        {
-                            cmd.Parameters.AddWithValue("@diaryId", diaryId);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    MessageBox.Show("Diary entry deleted successfully.");
-                    LoadDiaryEntries();
-                    ClearFields();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select an entry to delete.");
-            }
-        }
-
-        private void labelBackDiary_Click(object sender, EventArgs e)
-        {
-            Dashboard dashboard = new Dashboard();
-            dashboard.Show();
-            this.Close();
-        }
-
         private void dateDiary_ValueChanged(object sender, EventArgs e)
         {
 
@@ -162,9 +94,84 @@ namespace Study101Project
         {
             
         }
-        private void labelClearDiary_Click(object sender, EventArgs e)
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Diary_List.SelectedIndex != -1)
+            {
+                string selectedItem = Diary_List.SelectedItem.ToString();
+                int diaryId = int.Parse(selectedItem.Split('-').Last().Trim());
+
+                if (MessageBox.Show("Are you sure you want to delete this diary?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string query = "DELETE FROM tbl_diary WHERE diary_id = @diaryId";
+                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@diaryId", diaryId);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    MessageBox.Show("Diary deleted successfully.");
+                    LoadDiaryEntries();
+                    ClearFields();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an diary to delete.");
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            string title = textBoxName.Text;
+            string content = textBox1.Text;
+            DateTime date = dateDiary.Value;
+
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(content))
+            {
+                MessageBox.Show("Please enter both title and content.");
+                return;
+            }
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                string query = "INSERT INTO tbl_diary (diary_title, diary_content, user_id, diary_date) VALUES (@title, @content, @userId, @date)";
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@title", title);
+                    cmd.Parameters.AddWithValue("@content", content);
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show("Diary saved successfully.");
+            LoadDiaryEntries();
+            ClearFields();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
         {
             ClearFields();
         }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearFields();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Close();
+        }
     }
+    
 }

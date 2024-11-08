@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Profile));
             this.lblName = new System.Windows.Forms.Label();
             this.lblEmail = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -39,6 +38,9 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUserID = new System.Windows.Forms.Label();
             this.txtUserID = new System.Windows.Forms.TextBox();
+            this.lblHello = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblName
@@ -47,7 +49,7 @@
             this.lblName.AutoSize = true;
             this.lblName.BackColor = System.Drawing.Color.FloralWhite;
             this.lblName.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(571, 270);
+            this.lblName.Location = new System.Drawing.Point(551, 225);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(64, 21);
             this.lblName.TabIndex = 6;
@@ -59,7 +61,7 @@
             this.lblEmail.AutoSize = true;
             this.lblEmail.BackColor = System.Drawing.Color.FloralWhite;
             this.lblEmail.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmail.Location = new System.Drawing.Point(571, 184);
+            this.lblEmail.Location = new System.Drawing.Point(551, 139);
             this.lblEmail.Name = "lblEmail";
             this.lblEmail.Size = new System.Drawing.Size(55, 21);
             this.lblEmail.TabIndex = 5;
@@ -70,7 +72,7 @@
             this.txtEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtEmail.BackColor = System.Drawing.Color.FloralWhite;
             this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEmail.Location = new System.Drawing.Point(565, 211);
+            this.txtEmail.Location = new System.Drawing.Point(545, 166);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(474, 30);
             this.txtEmail.TabIndex = 0;
@@ -81,7 +83,7 @@
             this.txtName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtName.BackColor = System.Drawing.Color.FloralWhite;
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(565, 305);
+            this.txtName.Location = new System.Drawing.Point(545, 260);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(474, 30);
             this.txtName.TabIndex = 2;
@@ -103,7 +105,7 @@
             // 
             this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.buttonSave.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSave.Location = new System.Drawing.Point(923, 564);
+            this.buttonSave.Location = new System.Drawing.Point(940, 621);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(116, 29);
             this.buttonSave.TabIndex = 7;
@@ -117,7 +119,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FloralWhite;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(571, 367);
+            this.label1.Location = new System.Drawing.Point(551, 322);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 21);
             this.label1.TabIndex = 9;
@@ -129,7 +131,7 @@
             this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUsername.BackColor = System.Drawing.Color.FloralWhite;
             this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUsername.Location = new System.Drawing.Point(565, 402);
+            this.txtUsername.Location = new System.Drawing.Point(545, 357);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(474, 30);
             this.txtUsername.TabIndex = 8;
@@ -141,7 +143,7 @@
             this.lblUserID.AutoSize = true;
             this.lblUserID.BackColor = System.Drawing.Color.FloralWhite;
             this.lblUserID.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserID.Location = new System.Drawing.Point(571, 459);
+            this.lblUserID.Location = new System.Drawing.Point(551, 414);
             this.lblUserID.Name = "lblUserID";
             this.lblUserID.Size = new System.Drawing.Size(69, 21);
             this.lblUserID.TabIndex = 11;
@@ -153,19 +155,57 @@
             this.txtUserID.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtUserID.BackColor = System.Drawing.Color.FloralWhite;
             this.txtUserID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUserID.Location = new System.Drawing.Point(565, 494);
+            this.txtUserID.Location = new System.Drawing.Point(545, 449);
             this.txtUserID.Name = "txtUserID";
             this.txtUserID.Size = new System.Drawing.Size(474, 30);
             this.txtUserID.TabIndex = 10;
             this.txtUserID.TextChanged += new System.EventHandler(this.txtUserID_TextChanged);
             // 
+            // lblHello
+            // 
+            this.lblHello.AutoSize = true;
+            this.lblHello.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblHello.Font = new System.Drawing.Font("Century Gothic", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHello.Location = new System.Drawing.Point(41, 34);
+            this.lblHello.Name = "lblHello";
+            this.lblHello.Size = new System.Drawing.Size(209, 44);
+            this.lblHello.TabIndex = 12;
+            this.lblHello.Text = "Hi, Elshera!";
+            this.lblHello.Click += new System.EventHandler(this.lblHello_Click);
+            // 
+            // lblPassword
+            // 
+            this.lblPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblPassword.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(551, 515);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(90, 21);
+            this.lblPassword.TabIndex = 14;
+            this.lblPassword.Text = "Password";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtPassword.BackColor = System.Drawing.Color.FloralWhite;
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(545, 552);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(474, 30);
+            this.txtPassword.TabIndex = 15;
+            this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
+            // 
             // Profile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::Study101Project.Properties.Resources.Screenshot_2024_10_12_185203;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1134, 680);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.lblPassword);
+            this.Controls.Add(this.lblHello);
             this.Controls.Add(this.lblUserID);
             this.Controls.Add(this.txtUserID);
             this.Controls.Add(this.label1);
@@ -198,5 +238,8 @@
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblUserID;
         private System.Windows.Forms.TextBox txtUserID;
+        private System.Windows.Forms.Label lblHello;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.TextBox txtPassword;
     }
 }

@@ -21,7 +21,6 @@ namespace Study101Project
         {
             Daydetails dayDetailsForm = new Daydetails();
             dayDetailsForm.ShowDialog();
-            this.Close(); // Close the Choose form
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -29,6 +28,11 @@ namespace Study101Project
             addevent addEventForm = new addevent();
             addEventForm.ShowDialog();
             this.Close();
+        }
+
+        private void Choose_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Study101Project
         private DataSet ds = new DataSet();
         private string alamat, query;
 
-        // Class to hold user session data
         public class UserSession
         {
             public static string user_username { get; set; }
@@ -62,12 +61,11 @@ namespace Study101Project
 
                 if (ds.Tables[0].Rows.Count > 0)
                 {
-                    DataRow kolom = ds.Tables[0].Rows[0]; // Ambil hanya baris pertama
+                    DataRow kolom = ds.Tables[0].Rows[0];
                     string sandi = kolom["user_password"].ToString();
 
                     if (sandi == txtPassword.Text)
                     {
-                        // Menyimpan data sesuai dengan jenis login
 
                         UserSession.user_password = kolom["user_password"].ToString();
                         UserSession.user_email = kolom["user_email"].ToString();
@@ -77,7 +75,7 @@ namespace Study101Project
 
                         Dashboard dashboard = new Dashboard();
                         dashboard.Show();
-                        this.Hide(); // Sembunyikan form login jika diperlukan
+                        this.Hide();
                     }
                     else
                     {
@@ -121,8 +119,15 @@ namespace Study101Project
 
         }
 
+        private void lblSignin_Click(object sender, EventArgs e)
+        {
+            SignIn signin = new SignIn();
+            signin.Show();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
+
         }
     }
 }

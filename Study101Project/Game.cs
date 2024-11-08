@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Study101Project
@@ -41,7 +38,8 @@ namespace Study101Project
             Label titleLabel = new Label
             {
                 Text = "Memory Card Game",
-                Font = new Font("Arial", 20, FontStyle.Bold),
+                Font = new Font("Century Gothic", 20, FontStyle.Bold),
+                BackColor = Color.White,
                 AutoSize = true
             };
             titleLabel.Location = new Point((this.ClientSize.Width - titleLabel.Width) / 2, 20);
@@ -82,8 +80,8 @@ namespace Study101Project
             {
                 Text = "New Game",
                 Width = 120,
-                Height = 40,
-                Font = new Font("Arial", 12)
+                Height = 30,
+                Font = new Font("Arial", 10)
             };
             newGameButton.Location = new Point(
                 (this.ClientSize.Width - newGameButton.Width) / 2,
@@ -91,6 +89,20 @@ namespace Study101Project
             );
             newGameButton.Click += NewGameButton_Click;
             this.Controls.Add(newGameButton);
+
+            Button backButton = new Button
+            {
+                Text = "Back",
+                Width = 120,
+                Height = 30,
+                Font = new Font("Arial", 10)
+            };
+            backButton.Location = new Point(
+                (this.ClientSize.Width - backButton.Width) / 2,
+                newGameButton.Bottom + 10
+            );
+            backButton.Click += BackButton_Click;
+            this.Controls.Add(backButton);
 
             timer.Interval = 750;
             timer.Tick += Timer_Tick;
@@ -156,9 +168,16 @@ namespace Study101Project
             }
         }
 
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Close();
+        }
+
         private void Game_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

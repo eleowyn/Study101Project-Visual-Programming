@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Calender));
             this.labelMonthyear = new System.Windows.Forms.Label();
             this.daycontainer = new System.Windows.Forms.FlowLayoutPanel();
             this.labelMonday = new System.Windows.Forms.Label();
@@ -190,7 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::Study101Project.Properties.Resources.Screenshot_2024_10_13_230259;
             this.ClientSize = new System.Drawing.Size(1299, 765);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.buttonNext);

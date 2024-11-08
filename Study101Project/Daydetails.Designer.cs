@@ -30,15 +30,21 @@
         {
             this.listViewEvent = new System.Windows.Forms.ListView();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.Event_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewEvent
             // 
+            this.listViewEvent.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Event_Title});
+            this.listViewEvent.FullRowSelect = true;
+            this.listViewEvent.GridLines = true;
+            this.listViewEvent.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listViewEvent.HideSelection = false;
-            this.listViewEvent.Location = new System.Drawing.Point(163, -6);
+            this.listViewEvent.Location = new System.Drawing.Point(163, 8);
             this.listViewEvent.Name = "listViewEvent";
-            this.listViewEvent.Size = new System.Drawing.Size(636, 462);
+            this.listViewEvent.Size = new System.Drawing.Size(636, 448);
             this.listViewEvent.TabIndex = 0;
             this.listViewEvent.UseCompatibleStateImageBehavior = false;
             this.listViewEvent.SelectedIndexChanged += new System.EventHandler(this.listViewEvent_SelectedIndexChanged);
@@ -54,16 +60,16 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnUpdate
+            // btnBack
             // 
-            this.btnUpdate.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(33, 378);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(89, 33);
-            this.btnUpdate.TabIndex = 2;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnBack.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Location = new System.Drawing.Point(33, 378);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(89, 33);
+            this.btnBack.TabIndex = 2;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // Daydetails
             // 
@@ -71,7 +77,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.listViewEvent);
             this.Name = "Daydetails";
@@ -86,6 +92,7 @@
 
         private System.Windows.Forms.ListView listViewEvent;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.ColumnHeader Event_Title;
     }
 }
