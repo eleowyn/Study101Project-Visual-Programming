@@ -10,6 +10,7 @@ namespace Study101Project
     public partial class Diary : Form
     {
         private string connectionString = "server=localhost; database=db_study101; username=root; password=;";
+        private int? selectedDiaryId = null; // Track the selected diary ID
 
         public Diary()
         {
@@ -43,16 +44,12 @@ namespace Study101Project
             }
         }
 
-        private void labelNewDiary_Click(object sender, EventArgs e)
-        {
-            ClearFields();
-        }
-
         private void ClearFields()
         {
             textBoxName.Clear();
             textBox1.Clear();
             dateDiary.Value = DateTime.Now;
+            selectedDiaryId = null;
         }
 
         private void Diary_List_SelectedIndexChanged(object sender, EventArgs e)
@@ -61,6 +58,8 @@ namespace Study101Project
             {
                 string selectedItem = Diary_List.SelectedItem.ToString();
                 int diaryId = int.Parse(selectedItem.Split('-').Last().Trim());
+                selectedDiaryId = diaryId;
+
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -82,49 +81,6 @@ namespace Study101Project
             }
         }
 
-        private void dateDiary_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-        private void textBoxName_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (Diary_List.SelectedIndex != -1)
-            {
-                string selectedItem = Diary_List.SelectedItem.ToString();
-                int diaryId = int.Parse(selectedItem.Split('-').Last().Trim());
-
-                if (MessageBox.Show("Are you sure you want to delete this diary?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    using (MySqlConnection connection = new MySqlConnection(connectionString))
-                    {
-                        connection.Open();
-                        string query = "DELETE FROM tbl_diary WHERE diary_id = @diaryId";
-                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
-                        {
-                            cmd.Parameters.AddWithValue("@diaryId", diaryId);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    MessageBox.Show("Diary deleted successfully.");
-                    LoadDiaryEntries();
-                    ClearFields();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select an diary to delete.");
-            }
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
             string title = textBoxName.Text;
@@ -140,20 +96,76 @@ namespace Study101Project
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 connection.Open();
-                string query = "INSERT INTO tbl_diary (diary_title, diary_content, user_id, diary_date) VALUES (@title, @content, @userId, @date)";
-                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+
+                if (selectedDiaryId.HasValue)
                 {
-                    cmd.Parameters.AddWithValue("@title", title);
-                    cmd.Parameters.AddWithValue("@content", content);
-                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
-                    cmd.Parameters.AddWithValue("@date", date);
-                    cmd.ExecuteNonQuery();
+                    string query = "UPDATE tbl_diary SET diary_title = @title, diary_content = @content, diary_date = @date WHERE diary_id = @diaryId";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@title", title);
+                        cmd.Parameters.AddWithValue("@content", content);
+                        cmd.Parameters.AddWithValue("@date", date);
+                        cmd.Parameters.AddWithValue("@diaryId", selectedDiaryId.Value);
+                        cmd.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Diary updated successfully.");
+                }
+                else
+                {
+                    string query = "INSERT INTO tbl_diary (diary_title, diary_content, user_id, diary_date) VALUES (@title, @content, @userId, @date)";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@title", title);
+                        cmd.Parameters.AddWithValue("@content", content);
+                        cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                        cmd.Parameters.AddWithValue("@date", date);
+                        cmd.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Diary saved successfully.");
                 }
             }
 
-            MessageBox.Show("Diary saved successfully.");
             LoadDiaryEntries();
             ClearFields();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (Diary_List.SelectedIndex != -1 && selectedDiaryId.HasValue)
+            {
+                if (MessageBox.Show("Are you sure you want to delete this diary?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    using (MySqlConnection connection = new MySqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        string query = "DELETE FROM tbl_diary WHERE diary_id = @diaryId";
+                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@diaryId", selectedDiaryId.Value);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    MessageBox.Show("Diary deleted successfully.");
+                    LoadDiaryEntries();
+                    ClearFields();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a diary to delete.");
+            }
+        }
+        private void dateDiary_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -173,5 +185,4 @@ namespace Study101Project
             this.Close();
         }
     }
-    
 }

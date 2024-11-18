@@ -65,9 +65,13 @@ namespace Study101Project
         private void buttonStop_Click(object sender, EventArgs e)
         {
             timer4.Stop();
-            hours = 0;
-            minutes = 0;
-            seconds = 0;
+            hours = 0;     
+            minutes = 0;   
+            seconds = 0;   
+            labelJam.Text = hours.ToString();
+            labelMenit.Text = minutes.ToString();
+            labelDetik.Text = seconds.ToString();
+            btnPause.Text = "Pause";
         }
 
         private void timer4_Tick(object sender, EventArgs e)
@@ -202,6 +206,20 @@ namespace Study101Project
         private void lblAnswer_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            if (timer4.Enabled)
+            {
+                timer4.Stop();
+                btnPause.Text = "Resume";
+            }
+            else
+            {
+                timer4.Start();
+                btnPause.Text = "Pause";
+            }
         }
     }
 }

@@ -40,7 +40,6 @@
             this.labelType = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btnBack = new System.Windows.Forms.Button();
-            this.lblProgress = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkedListBox1
@@ -197,26 +196,12 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.button3_Click);
             // 
-            // lblProgress
-            // 
-            this.lblProgress.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblProgress.AutoSize = true;
-            this.lblProgress.BackColor = System.Drawing.Color.FloralWhite;
-            this.lblProgress.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblProgress.Location = new System.Drawing.Point(538, 124);
-            this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(175, 22);
-            this.lblProgress.TabIndex = 22;
-            this.lblProgress.Text = "Your Progress = 0%";
-            this.lblProgress.Click += new System.EventHandler(this.lblProgress_Click);
-            // 
             // TodoList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::Study101Project.Properties.Resources.Screenshot_2024_10_13_230259;
             this.ClientSize = new System.Drawing.Size(1130, 678);
-            this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.labelType);
@@ -251,6 +236,5 @@
         private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Label lblProgress;
     }
 }

@@ -15,6 +15,7 @@ namespace Study101Project
     public partial class Tracker : Form
     {
         private string connectionString = "server=localhost; database=db_study101; username=root; password=;";
+        private string selectedSubject = null;
 
         public Tracker()
         {
@@ -29,7 +30,6 @@ namespace Study101Project
             flowLayoutPanel1.WrapContents = true;
             flowLayoutPanel1.AutoScroll = true;
 
-            // Configure flowLayoutPanel4 for vertical layout
             flowLayoutPanel4.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel4.WrapContents = false;
             flowLayoutPanel4.AutoScroll = true;
@@ -118,7 +118,18 @@ namespace Study101Project
                             BackColor = Color.FloralWhite,
                             FlatStyle = FlatStyle.Flat,
                         };
-                        subjectButton.Click += (sender, e) => LoadSubjectWeights(subjectName);
+                        subjectButton.Click += (sender, e) =>
+                        {
+                            LoadSubjectWeights(subjectName);
+                            selectedSubject = subjectName;
+                            foreach (Control ctrl in flowLayoutPanel1.Controls)
+                            {
+                                if (ctrl is Button btn)
+                                {
+                                    btn.BackColor = (btn == subjectButton) ? Color.LightBlue : Color.FloralWhite;
+                                }
+                            }
+                        };
 
                         flowLayoutPanel1.Controls.Add(subjectButton);
                     }
@@ -170,13 +181,13 @@ namespace Study101Project
                     {
                         string[] categories = { "Assignment", "Quiz", "Test", "Midterm", "Final", "Project" };
                         float[] weights = {
-                    Convert.ToSingle(reader["assignment_weight"]),
-                    Convert.ToSingle(reader["quiz_weight"]),
-                    Convert.ToSingle(reader["test_weight"]),
-                    Convert.ToSingle(reader["mid_weight"]),
-                    Convert.ToSingle(reader["final_weight"]),
-                    Convert.ToSingle(reader["project_weight"])
-                };
+                            Convert.ToSingle(reader["assignment_weight"]),
+                            Convert.ToSingle(reader["quiz_weight"]),
+                            Convert.ToSingle(reader["test_weight"]),
+                            Convert.ToSingle(reader["mid_weight"]),
+                            Convert.ToSingle(reader["final_weight"]),
+                            Convert.ToSingle(reader["project_weight"])
+                        };
 
                         ListView listView = new ListView
                         {
@@ -213,87 +224,96 @@ namespace Study101Project
             }
         }
 
-        private void textBoxSubject_TextChanged(object sender, EventArgs e)
+        private void btnDelete_Click(object sender, EventArgs e)
         {
-            
+            if (string.IsNullOrEmpty(selectedSubject))
+            {
+                MessageBox.Show("Please select a subject to delete.");
+                return;
+            }
+
+            if (MessageBox.Show($"Are you sure you want to delete the subject '{selectedSubject}' and all its contents?",
+                "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        string deleteContentsQuery = @"DELETE FROM tbl_score WHERE subject_id = 
+                                               (SELECT subject_id FROM tbl_subjects WHERE subject_name = @subjectName AND user_id = @userId)";
+                        MySqlCommand deleteContentsCmd = new MySqlCommand(deleteContentsQuery, connection);
+                        deleteContentsCmd.Parameters.AddWithValue("@subjectName", selectedSubject);
+                        deleteContentsCmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                        deleteContentsCmd.ExecuteNonQuery();
+
+                        string deleteSubjectQuery = "DELETE FROM tbl_subjects WHERE subject_name = @subjectName AND user_id = @userId";
+                        MySqlCommand deleteSubjectCmd = new MySqlCommand(deleteSubjectQuery, connection);
+                        deleteSubjectCmd.Parameters.AddWithValue("@subjectName", selectedSubject);
+                        deleteSubjectCmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                        deleteSubjectCmd.ExecuteNonQuery();
+
+                        MessageBox.Show($"Subject '{selectedSubject}' and all its contents were deleted successfully!");
+
+                        selectedSubject = null;
+
+                        LoadSubjects();
+                        flowLayoutPanel4.Controls.Clear();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error deleting subject and its contents: {ex.Message}");
+                    }
+                }
+            }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
+        private void textBoxSubject_TextChanged(object sender, EventArgs e) {
         }
-
-        private void Tracker_Load(object sender, EventArgs e)
-        {
-
+        private void Tracker_Load(object sender, EventArgs e) {
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
+        private void label3_Click(object sender, EventArgs e) {
         }
-
-        private void labelSubject_Click(object sender, EventArgs e)
-        {
-
+        private void labelSubject_Click(object sender, EventArgs e) { 
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+        private void label1_Click(object sender, EventArgs e) { 
         }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+        private void label2_Click(object sender, EventArgs e) { 
         }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
+        private void label6_Click(object sender, EventArgs e) { 
         }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
+        private void label5_Click(object sender, EventArgs e) {
         }
-
         private void numericUpDownAssignment_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void numericUpDownQuiz_ValueChanged(object sender, EventArgs e)
+        private void numericUpDownQuiz_ValueChanged(object sender, EventArgs e) 
         {
 
         }
-
-        private void numericUpDownTest_ValueChanged(object sender, EventArgs e)
+        private void numericUpDownTest_ValueChanged(object sender, EventArgs e) 
         {
 
         }
-
         private void numericUpDownMid_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void numericUpDownFinal_ValueChanged(object sender, EventArgs e)
+        private void numericUpDownFinal_ValueChanged(object sender, EventArgs e) 
         {
 
         }
-
-        private void numericUpDownProject_ValueChanged(object sender, EventArgs e)
+        private void numericUpDownProject_ValueChanged(object sender, EventArgs e) 
         {
 
         }
-
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e) 
         {
 
         }
-
-        private void flowLayoutPanel4_Paint(object sender, PaintEventArgs e)
+        private void flowLayoutPanel4_Paint(object sender, PaintEventArgs e) 
         {
 
         }

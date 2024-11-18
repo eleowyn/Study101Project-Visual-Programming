@@ -53,6 +53,7 @@
             this.lblQuestion = new System.Windows.Forms.Label();
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinutes)).BeginInit();
@@ -64,6 +65,7 @@
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.BackColor = System.Drawing.Color.MistyRose;
+            this.groupBox1.Controls.Add(this.btnPause);
             this.groupBox1.Controls.Add(this.labelDetik);
             this.groupBox1.Controls.Add(this.labelMenit);
             this.groupBox1.Controls.Add(this.labelJam);
@@ -117,18 +119,18 @@
             // buttonStop
             // 
             this.buttonStop.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStop.Location = new System.Drawing.Point(257, 285);
+            this.buttonStop.Location = new System.Drawing.Point(304, 285);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(76, 34);
             this.buttonStop.TabIndex = 8;
-            this.buttonStop.Text = "Stop";
+            this.buttonStop.Text = "Reset";
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // buttonStart
             // 
             this.buttonStart.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStart.Location = new System.Drawing.Point(164, 285);
+            this.buttonStart.Location = new System.Drawing.Point(121, 285);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(76, 34);
             this.buttonStart.TabIndex = 7;
@@ -320,6 +322,17 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnPause
+            // 
+            this.btnPause.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPause.Location = new System.Drawing.Point(202, 285);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(96, 34);
+            this.btnPause.TabIndex = 12;
+            this.btnPause.Text = "Pause";
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
             // STechnique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -368,5 +381,6 @@
         private System.Windows.Forms.Button btnPrevious;
         private System.Windows.Forms.Label lblTemplateA;
         private System.Windows.Forms.Label lblTemplateQ;
+        private System.Windows.Forms.Button btnPause;
     }
 }

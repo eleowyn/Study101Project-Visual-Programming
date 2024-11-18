@@ -107,25 +107,24 @@ namespace Study101Project
             {
                 try
                 {
-                    conn.Open();
-                    string query = @"
-                SELECT 
-                    sc.subject_type,
-                    sc.task_name,
-                    sc.score,
-                    CASE 
-                        WHEN sc.subject_type = 'Assignment' THEN s.assignment_weight
-                        WHEN sc.subject_type = 'Quiz' THEN s.quiz_weight
-                        WHEN sc.subject_type = 'Test' THEN s.test_weight
-                        WHEN sc.subject_type = 'Midterm' THEN s.mid_weight
-                        WHEN sc.subject_type = 'Final' THEN s.final_weight
-                        WHEN sc.subject_type = 'Project' THEN s.project_weight
-                    END as weight
-                FROM tbl_score sc
-                JOIN tbl_subjects s ON sc.subject_name = s.subject_name
-                WHERE sc.subject_name = @subjectName 
-                AND sc.user_id = @userId
-                ORDER BY sc.subject_type, sc.task_name";
+                    conn.Open(); string query = @"
+                        SELECT 
+                            sc.subject_type,
+                            sc.task_name,
+                            sc.score,
+                            CASE 
+                                WHEN sc.subject_type = 'Assignment' THEN s.assignment_weight
+                                WHEN sc.subject_type = 'Quiz' THEN s.quiz_weight
+                                WHEN sc.subject_type = 'Test' THEN s.test_weight
+                                WHEN sc.subject_type = 'Midterm' THEN s.mid_weight
+                                WHEN sc.subject_type = 'Final' THEN s.final_weight
+                                WHEN sc.subject_type = 'Project' THEN s.project_weight
+                            END as weight
+                        FROM tbl_score sc
+                        JOIN tbl_subjects s ON s.subject_id = sc.subject_id
+                        WHERE s.subject_name = @subjectName 
+                        AND sc.user_id = @userId
+                        ORDER BY sc.subject_type, sc.task_name";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@subjectName", subjectName);
@@ -330,14 +329,28 @@ namespace Study101Project
                 {
                     conn.Open();
 
-                    Console.WriteLine($"Adding score - Subject: {subject}, Category: {category}, TaskName: {taskName}, Score: {score}, UserID: {UserSession.user_id}");
+                    // First get the subject_id
+                    string getSubjectIdQuery = "SELECT subject_id FROM tbl_subjects WHERE subject_name = @subject AND user_id = @userId";
+                    MySqlCommand getSubjectCmd = new MySqlCommand(getSubjectIdQuery, conn);
+                    getSubjectCmd.Parameters.AddWithValue("@subject", subject);
+                    getSubjectCmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+
+                    object result = getSubjectCmd.ExecuteScalar();
+                    if (result == null)
+                    {
+                        MessageBox.Show("Subject not found!");
+                        return;
+                    }
+
+                    int subjectId = Convert.ToInt32(result);
 
                     string insertScoreQuery = @"INSERT INTO tbl_score
-            (subject_name, subject_type, task_name, score, user_id) 
-            VALUES 
-            (@subject, @category, @taskName, @score, @userId)";
+                (subject_id, subject_name, subject_type, task_name, score, user_id) 
+                VALUES 
+                (@subjectId, @subject, @category, @taskName, @score, @userId)";
 
                     MySqlCommand insertCmd = new MySqlCommand(insertScoreQuery, conn);
+                    insertCmd.Parameters.AddWithValue("@subjectId", subjectId);
                     insertCmd.Parameters.AddWithValue("@subject", subject);
                     insertCmd.Parameters.AddWithValue("@category", category);
                     insertCmd.Parameters.AddWithValue("@taskName", taskName);
@@ -345,8 +358,6 @@ namespace Study101Project
                     insertCmd.Parameters.AddWithValue("@userId", UserSession.user_id);
 
                     int rowsAffected = insertCmd.ExecuteNonQuery();
-                    Console.WriteLine($"Rows affected: {rowsAffected}");
-
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Score added successfully!");
