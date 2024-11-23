@@ -352,5 +352,13 @@ namespace Study101Project
 
             this.Close();
         }
+
+        private void print_Click(object sender, EventArgs e)
+        {
+            CREPORT CReport = new CREPORT();
+            CReport.Show();
+
+            this.Close();
+        }
     }
 }
