@@ -115,29 +115,28 @@ namespace Study101Project
                 try
                 {
                     connection.Open();
-                    // Query untuk mengambil data Question dan Answer berdasarkan user_id dan currentIndex
                     string query = "SELECT Question, Answer FROM tbl_flashcard WHERE user_id = @userId LIMIT 1 OFFSET @offset";
                     var cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);  // Menggunakan user_id untuk mengambil flashcards milik pengguna
-                    cmd.Parameters.AddWithValue("@offset", currentIndex);  // Menggunakan currentIndex untuk menavigasi data flashcards
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                    cmd.Parameters.AddWithValue("@offset", currentIndex);
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())  // Jika data ditemukan
+                        if (reader.Read())
                         {
-                            lblQuestion.Text = reader.GetString("Question");  // Menampilkan Question dari database
-                            lblAnswer.Text = "";  // Menampilkan Answer kosong, akan ditampilkan nanti dengan tombol flip
+                            lblQuestion.Text = reader.GetString("Question");
+                            lblAnswer.Text = "";
                         }
                         else
                         {
-                            lblQuestion.Text = "No data available.";  // Jika tidak ada data
+                            lblQuestion.Text = "No data available.";
                             lblAnswer.Text = "No data available.";
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    lblQuestion.Text = "Error loading flashcards.";  // Menampilkan pesan error
+                    lblQuestion.Text = "Error loading flashcards.";
                     lblAnswer.Text = ex.Message;
                 }
             }
@@ -145,40 +144,39 @@ namespace Study101Project
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            int totalFlashcards = GetFlashcardCountFromDatabase();  // Mengambil jumlah total flashcards dari database
+            int totalFlashcards = GetFlashcardCountFromDatabase();
 
             if (totalFlashcards > 0)
             {
-                currentIndex = (currentIndex + 1) % totalFlashcards;  // Menavigasi ke flashcard berikutnya
-                DisplayFlashcard();  // Menampilkan flashcard berdasarkan index baru
+                currentIndex = (currentIndex + 1) % totalFlashcards;
+                DisplayFlashcard();
             }
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            int totalFlashcards = GetFlashcardCountFromDatabase();  // Mengambil jumlah total flashcards dari database
+            int totalFlashcards = GetFlashcardCountFromDatabase();
 
             if (totalFlashcards > 0)
             {
-                currentIndex = (currentIndex - 1 + totalFlashcards) % totalFlashcards;  // Menavigasi ke flashcard sebelumnya
-                DisplayFlashcard();  // Menampilkan flashcard berdasarkan index baru
+                currentIndex = (currentIndex - 1 + totalFlashcards) % totalFlashcards;
+                DisplayFlashcard();
             }
         }
 
         private void btnFlip_Click(object sender, EventArgs e)
         {
-            if (currentIndex >= 0)  // Pastikan currentIndex valid
+            if (currentIndex >= 0) 
             {
-                string answer = GetFlashcardAnswerFromDatabase(currentIndex);  // Mengambil answer flashcard dari database
-                lblAnswer.Text = answer;  // Menampilkan answer di label
+                string answer = GetFlashcardAnswerFromDatabase(currentIndex);
+                lblAnswer.Text = answer;
             }
             else
             {
-                lblAnswer.Text = "No answer available.";  // Menampilkan pesan jika tidak ada answer
+                lblAnswer.Text = "No answer available."; 
             }
         }
 
-        //tambah fungsi baru
         private int GetFlashcardCountFromDatabase()
         {
             int count = 0;
@@ -189,9 +187,9 @@ namespace Study101Project
                     connection.Open();
                     string query = "SELECT COUNT(*) FROM tbl_flashcard WHERE user_id = @userId";
                     var cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);  // Filter berdasarkan user_id
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
 
-                    count = Convert.ToInt32(cmd.ExecuteScalar());  // Mengambil hasil dari query (jumlah flashcards)
+                    count = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 catch (Exception ex)
                 {
@@ -211,14 +209,14 @@ namespace Study101Project
                     connection.Open();
                     string query = "SELECT Answer FROM tbl_flashcard WHERE user_id = @userId LIMIT 1 OFFSET @offset";
                     var cmd = new MySqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);  // Filter berdasarkan user_id
-                    cmd.Parameters.AddWithValue("@offset", index);   // Mengambil data berdasarkan index (currentIndex)
+                    cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+                    cmd.Parameters.AddWithValue("@offset", index);
 
                     using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())  // Jika ada data ditemukan
+                        if (reader.Read())
                         {
-                            answer = reader.GetString("Answer");  // Mengambil nilai Answer dari database
+                            answer = reader.GetString("Answer");
                         }
                     }
                 }
