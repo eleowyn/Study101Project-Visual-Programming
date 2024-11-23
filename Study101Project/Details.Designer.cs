@@ -206,9 +206,9 @@ namespace Study101Project
             this.lblCategory.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCategory.Location = new System.Drawing.Point(31, 229);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(76, 21);
+            this.lblCategory.Size = new System.Drawing.Size(53, 21);
             this.lblCategory.TabIndex = 17;
-            this.lblCategory.Text = "Subject";
+            this.lblCategory.Text = "Type";
             this.lblCategory.Click += new System.EventHandler(this.lblCategory_Click);
             // 
             // lblClick

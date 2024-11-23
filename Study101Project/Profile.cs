@@ -77,10 +77,9 @@ namespace Study101Project
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
-                    string query = "UPDATE tbl_user SET user_username = @userUsername, user_name = @userName, user_email = @userEmail, user_password = @userPassword WHERE user_id = @userId";
+                    string query = "UPDATE tbl_user SET user_name = @userName, user_email = @userEmail, user_password = @userPassword WHERE user_id = @userId";
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@userUsername", txtUsername.Text);
                         cmd.Parameters.AddWithValue("@userName", txtName.Text);
                         cmd.Parameters.AddWithValue("@userEmail", txtEmail.Text);
                         cmd.Parameters.AddWithValue("@userPassword", txtPassword.Text);
