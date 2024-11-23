@@ -358,5 +358,54 @@ namespace Study101Project
 
             this.Close();
         }
+
+        private void btndel_Click(object sender, EventArgs e)
+        {
+            // Konfirmasi penghapusan data
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this flashcard?", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                using (var connection = new MySqlConnection(connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+
+                        // Query untuk menghapus data berdasarkan Question
+                        string query = "DELETE FROM tbl_flashcard WHERE Question = @question AND user_id = @userId";
+                        var cmd = new MySqlCommand(query, connection);
+
+                        // Mengisi parameter query
+                        cmd.Parameters.AddWithValue("@question", lblQuestion.Text);
+                        cmd.Parameters.AddWithValue("@userId", UserSession.user_id);
+
+                        // Eksekusi query
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Menampilkan pesan sukses atau gagal
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Flashcard deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // Reset tampilan setelah penghapusan
+                            lblQuestion.Text = "";
+                            lblAnswer.Text = "";
+                            lblQuestion.Text = "No data available.";
+                            lblAnswer.Text = "No data available.";
+                        }
+                        else
+                        {
+                            MessageBox.Show("No matching flashcard found to delete.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error while deleting data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
     }
 }

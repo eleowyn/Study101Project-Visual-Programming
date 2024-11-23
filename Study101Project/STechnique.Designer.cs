@@ -56,6 +56,7 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.print = new System.Windows.Forms.Button();
+            this.btndel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSeconds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinutes)).BeginInit();
@@ -81,9 +82,9 @@
             this.groupBox1.Controls.Add(this.numericUpDownHours);
             this.groupBox1.Controls.Add(this.labelPomodoro);
             this.groupBox1.Location = new System.Drawing.Point(26, 87);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(378, 380);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -93,7 +94,7 @@
             // 
             this.btnPause.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPause.Location = new System.Drawing.Point(152, 232);
-            this.btnPause.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(2);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(72, 28);
             this.btnPause.TabIndex = 12;
@@ -139,7 +140,7 @@
             // 
             this.buttonStop.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStop.Location = new System.Drawing.Point(228, 232);
-            this.buttonStop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonStop.Margin = new System.Windows.Forms.Padding(2);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(57, 28);
             this.buttonStop.TabIndex = 8;
@@ -151,7 +152,7 @@
             // 
             this.buttonStart.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.Location = new System.Drawing.Point(91, 232);
-            this.buttonStart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(2);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(57, 28);
             this.buttonStart.TabIndex = 7;
@@ -196,7 +197,7 @@
             // numericUpDownSeconds
             // 
             this.numericUpDownSeconds.Location = new System.Drawing.Point(210, 183);
-            this.numericUpDownSeconds.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownSeconds.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownSeconds.Name = "numericUpDownSeconds";
             this.numericUpDownSeconds.Size = new System.Drawing.Size(124, 20);
             this.numericUpDownSeconds.TabIndex = 3;
@@ -204,7 +205,7 @@
             // numericUpDownMinutes
             // 
             this.numericUpDownMinutes.Location = new System.Drawing.Point(210, 136);
-            this.numericUpDownMinutes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownMinutes.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownMinutes.Name = "numericUpDownMinutes";
             this.numericUpDownMinutes.Size = new System.Drawing.Size(124, 20);
             this.numericUpDownMinutes.TabIndex = 2;
@@ -212,7 +213,7 @@
             // numericUpDownHours
             // 
             this.numericUpDownHours.Location = new System.Drawing.Point(210, 93);
-            this.numericUpDownHours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownHours.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownHours.Name = "numericUpDownHours";
             this.numericUpDownHours.Size = new System.Drawing.Size(124, 20);
             this.numericUpDownHours.TabIndex = 1;
@@ -232,6 +233,7 @@
             // 
             this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox2.BackColor = System.Drawing.Color.PapayaWhip;
+            this.groupBox2.Controls.Add(this.btndel);
             this.groupBox2.Controls.Add(this.lblTemplateA);
             this.groupBox2.Controls.Add(this.lblTemplateQ);
             this.groupBox2.Controls.Add(this.btnPrevious);
@@ -241,9 +243,9 @@
             this.groupBox2.Controls.Add(this.btnFlip);
             this.groupBox2.Controls.Add(this.lblQuestion);
             this.groupBox2.Location = new System.Drawing.Point(429, 87);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(482, 380);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -276,7 +278,7 @@
             // 
             this.btnPrevious.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrevious.Location = new System.Drawing.Point(135, 333);
-            this.btnPrevious.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(105, 32);
             this.btnPrevious.TabIndex = 5;
@@ -288,7 +290,7 @@
             // 
             this.btnAddFlashcard.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddFlashcard.Location = new System.Drawing.Point(196, 264);
-            this.btnAddFlashcard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddFlashcard.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddFlashcard.Name = "btnAddFlashcard";
             this.btnAddFlashcard.Size = new System.Drawing.Size(105, 32);
             this.btnAddFlashcard.TabIndex = 4;
@@ -300,7 +302,7 @@
             // 
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNext.Location = new System.Drawing.Point(271, 333);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(105, 32);
             this.btnNext.TabIndex = 3;
@@ -324,7 +326,7 @@
             // 
             this.btnFlip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFlip.Location = new System.Drawing.Point(196, 227);
-            this.btnFlip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFlip.Margin = new System.Windows.Forms.Padding(2);
             this.btnFlip.Name = "btnFlip";
             this.btnFlip.Size = new System.Drawing.Size(105, 32);
             this.btnFlip.TabIndex = 1;
@@ -353,7 +355,7 @@
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.Font = new System.Drawing.Font("Mongolian Baiti", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(26, 504);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(67, 24);
             this.button1.TabIndex = 2;
@@ -374,6 +376,21 @@
             this.print.UseVisualStyleBackColor = false;
             this.print.Click += new System.EventHandler(this.print_Click);
             // 
+            // btndel
+            // 
+            this.btndel.BackColor = System.Drawing.Color.Bisque;
+            this.btndel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btndel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btndel.ForeColor = System.Drawing.Color.Chocolate;
+            this.btndel.Location = new System.Drawing.Point(415, 14);
+            this.btndel.Margin = new System.Windows.Forms.Padding(2);
+            this.btndel.Name = "btndel";
+            this.btndel.Size = new System.Drawing.Size(63, 32);
+            this.btndel.TabIndex = 8;
+            this.btndel.Text = "Delete";
+            this.btndel.UseVisualStyleBackColor = false;
+            this.btndel.Click += new System.EventHandler(this.btndel_Click);
+            // 
             // STechnique
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -384,7 +401,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "STechnique";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STechnique";
@@ -426,5 +443,6 @@
         private System.Windows.Forms.Label lblTemplateQ;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button print;
+        private System.Windows.Forms.Button btndel;
     }
 }

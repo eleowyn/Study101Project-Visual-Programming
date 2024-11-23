@@ -63,6 +63,16 @@ namespace Study101Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dust_bin {
+            get {
+                object obj = ResourceManager.GetObject("dust-bin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Screenshot_2024_10_11_150238 {
             get {
                 object obj = ResourceManager.GetObject("Screenshot_2024_10_11_150238", resourceCulture);
