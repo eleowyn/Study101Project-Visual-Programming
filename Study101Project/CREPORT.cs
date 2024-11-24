@@ -21,5 +21,13 @@ namespace Study101Project
         {
 
         }
+
+        private void btnback_Click(object sender, EventArgs e)
+        {
+            STechnique STechnique = new STechnique();
+            STechnique.Show();
+
+            this.Close();
+        }
     }
 }
